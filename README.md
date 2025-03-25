@@ -149,9 +149,305 @@ Connect MySQL dbs through Database repository folder
 
 <!-- Database Schema Revision, Also image for Data Model and Entity Relationship Diagram ERD. Link should be point out through assets folder for editing README.md -->
 ## 🧊 Database Schema
+
+#### SQL
+```
+-- Parent Companies Table
+CREATE TABLE parent_companies (
+    id VARCHAR(255) PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    address VARCHAR(255) NOT NULL
+);
+
+-- Subsidiary Companies Table
+CREATE TABLE subsidiary_companies (
+    id VARCHAR(255) PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    address VARCHAR(255) NOT NULL,
+    parent_company_id VARCHAR(255),
+    FOREIGN KEY (parent_company_id) REFERENCES parent_companies(id)
+);
+
+-- Warehouses Table
+CREATE TABLE warehouses (
+    id VARCHAR(255) PRIMARY KEY,
+    location VARCHAR(255) NOT NULL,
+    subsidiary_company_id VARCHAR(255),
+    FOREIGN KEY (subsidiary_company_id) REFERENCES subsidiary_companies(id)
+);
+
+-- Suppliers Table
+CREATE TABLE suppliers (
+    id VARCHAR(255) PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    contact_info VARCHAR(255) NOT NULL
+);
+
+-- Batch Orders Table
+CREATE TABLE batch_orders (
+    id VARCHAR(255) PRIMARY KEY,
+    supplier_id VARCHAR(255),
+    order_date DATE NOT NULL,
+    delivery_date DATE NOT NULL,
+    FOREIGN KEY (supplier_id) REFERENCES suppliers(id)
+);
+
+-- Medicines Table
+CREATE TABLE medicines (
+    id VARCHAR(255) PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    description TEXT,
+    batch_order_id VARCHAR(255),
+    FOREIGN KEY (batch_order_id) REFERENCES batch_orders(id)
+);
+
+-- Inventory Table
+CREATE TABLE inventory (
+    id VARCHAR(255) PRIMARY KEY,
+    warehouse_id VARCHAR(255),
+    medicine_id VARCHAR(255),
+    quantity INT NOT NULL,
+    FOREIGN KEY (warehouse_id) REFERENCES warehouses(id),
+    FOREIGN KEY (medicine_id) REFERENCES medicines(id)
+);
+
+-- Orders Table
+CREATE TABLE orders (
+    id VARCHAR(255) PRIMARY KEY,
+    subsidiary_company_id VARCHAR(255),
+    order_date DATE NOT NULL,
+    status VARCHAR(50),
+    FOREIGN KEY (subsidiary_company_id) REFERENCES subsidiary_companies(id)
+);
+
+-- Order Items Table
+CREATE TABLE order_items (
+    id VARCHAR(255) PRIMARY KEY,
+    order_id VARCHAR(255),
+    medicine_id VARCHAR(255),
+    quantity INT NOT NULL,
+    FOREIGN KEY (order_id) REFERENCES orders(id),
+    FOREIGN KEY (medicine_id) REFERENCES medicines(id)
+);
+
+-- Shipments Table
+CREATE TABLE shipments (
+    id VARCHAR(255) PRIMARY KEY,
+    order_id VARCHAR(255),
+    shipment_date DATE NOT NULL,
+    distributor_id VARCHAR(255),
+    FOREIGN KEY (order_id) REFERENCES orders(id),
+    FOREIGN KEY (distributor_id) REFERENCES distributors(id)
+);
+
+-- Distributors Table
+CREATE TABLE distributors (
+    id VARCHAR(255) PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    contact_info VARCHAR(255) NOT NULL
+);
+
+-- Users Table
+CREATE TABLE users (
+    id VARCHAR(255) PRIMARY KEY,
+    username VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    role_id VARCHAR(255),
+    FOREIGN KEY (role_id) REFERENCES roles(id)
+);
+
+-- Roles Table
+CREATE TABLE roles (
+    id VARCHAR(255) PRIMARY KEY,
+    name VARCHAR(255) NOT NULL
+);
+
+-- Permissions Table
+CREATE TABLE permissions (
+    id VARCHAR(255) PRIMARY KEY,
+    name VARCHAR(255) NOT NULL
+);
+
+-- Role-Permission Junction Table for Many-to-Many Relationship
+CREATE TABLE role_permissions (
+    role_id VARCHAR(255),
+    permission_id VARCHAR(255),
+    PRIMARY KEY (role_id, permission_id),
+    FOREIGN KEY (role_id) REFERENCES roles(id),
+    FOREIGN KEY (permission_id) REFERENCES permissions(id)
+);
+```
+
 #### MongoDB
 ```
-🚀 Coming Soon!!!
+// Parent Companies Collection
+{
+  "parent_companies": [
+    {
+      "_id": "ObjectId('...')",
+      "name": "Parent Company Name",
+      "address": "Parent Company Address"
+    }
+  ]
+}
+
+// Subsidiary Companies Collection
+{
+  "subsidiary_companies": [
+    {
+      "_id": "ObjectId('...')",
+      "name": "Subsidiary Company Name",
+      "address": "Subsidiary Company Address",
+      "parent_company_id": "ObjectId('...')" // Reference to parent_companies
+    }
+  ]
+}
+
+// Warehouses Collection
+{
+  "warehouses": [
+    {
+      "_id": "ObjectId('...')",
+      "location": "Warehouse Location",
+      "subsidiary_company_id": "ObjectId('...')" // Reference to subsidiary_companies
+    }
+  ]
+}
+
+// Suppliers Collection
+{
+  "suppliers": [
+    {
+      "_id": "ObjectId('...')",
+      "name": "Supplier Name",
+      "contact_info": "Supplier Contact Info }
+  ]
+}
+
+// Batch Orders Collection
+{
+  "batch_orders": [
+    {
+      "_id": "ObjectId('...')",
+      "supplier_id": "ObjectId('...')", // Reference to suppliers
+      "order_date": "YYYY-MM-DD",
+      "delivery_date": "YYYY-MM-DD"
+    }
+  ]
+}
+
+// Medicines Collection
+{
+  "medicines": [
+    {
+      "_id": "ObjectId('...')",
+      "name": "Medicine Name",
+      "description": "Medicine Description",
+      "batch_order_id": "ObjectId('...')" // Reference to batch_orders
+    }
+  ]
+}
+
+// Inventory Collection
+{
+  "inventory": [
+    {
+      "_id": "ObjectId('...')",
+      "warehouse_id": "ObjectId('...')", // Reference to warehouses
+      "medicine_id": "ObjectId('...')", // Reference to medicines
+      "quantity": 0
+    }
+  ]
+}
+
+// Orders Collection
+{
+  "orders": [
+    {
+      "_id": "ObjectId('...')",
+      "subsidiary_company_id": "ObjectId('...')", // Reference to subsidiary_companies
+      "order_date": "YYYY-MM-DD",
+      "status": "Order Status"
+    }
+  ]
+}
+
+// Order Items Collection
+{
+  "order_items": [
+    {
+      "_id": "ObjectId('...')",
+      "order_id": "ObjectId('...')", // Reference to orders
+      "medicine_id": "ObjectId('...')", // Reference to medicines
+      "quantity": 0
+    }
+  ]
+}
+
+// Shipments Collection
+{
+  "shipments": [
+    {
+      "_id": "ObjectId('...')",
+      "order_id": "ObjectId('...')", // Reference to orders
+      "shipment_date": "YYYY-MM-DD",
+      "distributor_id": "ObjectId('...')" // Reference to distributors
+    }
+  ]
+}
+
+// Distributors Collection
+{
+  "distributors": [
+    {
+      "_id": "ObjectId('...')",
+      "name": "Distributor Name",
+      "contact_info": "Distributor Contact Info"
+    }
+  ]
+}
+
+// Users Collection
+{
+  "users": [
+    {
+      "_id": "ObjectId('...')",
+      "username": "User  Name",
+      "password": "User  Password",
+      "role_id": "ObjectId('...')" // Reference to roles
+    }
+  ]
+}
+
+// Roles Collection
+{
+  "roles": [
+    {
+      "_id": "ObjectId('...')",
+      "name": "Role Name"
+    }
+  ]
+}
+
+// Permissions Collection
+{
+  "permissions": [
+    {
+      "_id": "ObjectId('...')",
+      "name": "Permission Name"
+    }
+  ]
+}
+
+// Role-Permission Collection for Many-to-Many Relationship
+{
+  "role_permissions": [
+    {
+      "role_id": "ObjectId('...')", // Reference to roles
+      "permission_id": "ObjectId('...')" // Reference to permissions
+    }
+  ]
+}
 ```
 ## 🧊 Data Insertion 
 
@@ -333,10 +629,13 @@ Chronological list of updates, bug fixes, new features, and other modifications 
 ### Fixed 
 - ✨ Fix changelogs
 
-## [11.0.1] - 2025-03-25   
+## [1.0.1] - 2025-03-26   
 ### Added  
 - ✨ Create an design concept for Pharmaceutical Supply Chain Management
 - ✨ Create Entity Relationship Diagram
+- ✨ Add Entity Relationship Diagram (ERD) files
+- ✨ Add Database Schema for SQL
+- ✨ Add Database Schema for MongoDB
 
 🧊 CTFDMBSL
 
