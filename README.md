@@ -321,7 +321,7 @@ Professor Mrs. Jensen Santillan is a highly respected academic and industry prac
 # 📫 Changelogs 
 Chronological list of updates, bug fixes, new features, and other modifications for our Pharmaceutical Supply Chain Management.
 
-## 💻 [1.0.0] - 2025-03-23      
+## 💻 [1.0.0] - 2025-03-22      
 ### Role & Project Management
 
 ### Added  
@@ -333,9 +333,10 @@ Chronological list of updates, bug fixes, new features, and other modifications 
 ### Fixed 
 - ✨ Fix changelogs
 
-## [11.0.1] - 2024-11-30   
+## [11.0.1] - 2025-03-25   
 ### Added  
 - ✨ Create an design concept for Pharmaceutical Supply Chain Management
+- ✨ Create Entity Relationship Diagram
 
 🧊 CTFDMBSL
 
