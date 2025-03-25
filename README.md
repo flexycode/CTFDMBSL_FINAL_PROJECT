@@ -500,13 +500,8 @@ Full Overview of Normalization is in the Folder of documentation
 <!-- Entity Relationship Diagram Image link down below -->
 ## 🧊 Entity Relationship Diagram
 
-```
-🚀 Coming Soon!!!
-```
+<img src="https://github.com/flexycode/CTFDMBSL_FINAL_PROJECT/blob/main/assets/Pharmaceutical%20Supply%20Chain.png" />
 
-<!-- ERD Image 
-<img src="https://github.com/flexycode/CTINFMGL_FINAL_PROJECT/blob/main/assets/Entity%20Relationship%20Diagram%20-%20ALA.png" />
--->
 
 <!-- Sequence Diagram Image link down below -->
 ## 🧊 Sequence Diagram
