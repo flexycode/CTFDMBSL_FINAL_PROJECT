@@ -499,9 +499,11 @@ Full Overview of Normalization is in the Folder of documentation
 
 <!-- Entity Relationship Diagram Image link down below -->
 ## 🧊 Entity Relationship Diagram
-
+#### Proposal Version 
 <img src="https://github.com/flexycode/CTFDMBSL_FINAL_PROJECT/blob/main/assets/Pharmaceutical%20Supply%20Chain.png" />
 
+#### Final Version 
+<img src="https://github.com/flexycode/CTFDMBSL_FINAL_PROJECT/blob/main/assets/PSCM%20-%20ERD.png" />
 
 <!-- Sequence Diagram Image link down below -->
 ## 🧊 Sequence Diagram
