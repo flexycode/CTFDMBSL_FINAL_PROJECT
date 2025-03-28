@@ -333,13 +333,8 @@ Description 🚀 Coming Soon!!!
 
 ## 🧊 Flow Chart
 
-```
-🚀 Coming Soon!!!
-```
+<img src="https://github.com/flexycode/CTFDMBSL_FINAL_PROJECT/blob/main/assets/Flow%20Chart.png" />
 
-<!-- Flow Chart Image 
-<img src="https://github.com/flexycode/CTINFMGL_FINAL_PROJECT/blob/main/assets/Flow%20Chart.png" />
--->
 
 <!-- Entity Attribute Value Model Image link down below -->
 ## 🧊 Entity Attribute Value Model
@@ -377,13 +372,7 @@ Full Overview of Normalization is in the Folder of documentation
 <!-- Sequence Diagram Image link down below -->
 ## 🧊 Sequence Diagram
 
-```
-🚀 Coming Soon!!!
-```
-
-<!-- Sequence Diagram Image 
-<img src="https://github.com/flexycode/CTINFMGL_FINAL_PROJECT/blob/main/assets/Sequence%20Diagram.png" />
--->
+<img src="https://github.com/flexycode/CTFDMBSL_FINAL_PROJECT/blob/main/assets/Sequence%20Diagram.png" />
 
 <!-- Cloud Architecture Image link down below -->
 ## 🧊 Cloud Architecture
