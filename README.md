@@ -152,23 +152,18 @@ Connect MySQL dbs through Database repository folder
 
 #### SQL
 ```
--- Parent Companies Table
 CREATE TABLE parent_companies (
     id VARCHAR(255) PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     address VARCHAR(255) NOT NULL
 );
 
--- Subsidiary Companies Table
 CREATE TABLE subsidiary_companies (
     id VARCHAR(255) PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
-    address VARCHAR(255) NOT NULL,
-    parent_company_id VARCHAR(255),
-    FOREIGN KEY (parent_company_id) REFERENCES parent_companies(id)
+    address VARCHAR(255) NOT NULL
 );
 
--- Warehouses Table
 CREATE TABLE warehouses (
     id VARCHAR(255) PRIMARY KEY,
     location VARCHAR(255) NOT NULL,
@@ -176,14 +171,12 @@ CREATE TABLE warehouses (
     FOREIGN KEY (subsidiary_company_id) REFERENCES subsidiary_companies(id)
 );
 
--- Suppliers Table
 CREATE TABLE suppliers (
     id VARCHAR(255) PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     contact_info VARCHAR(255) NOT NULL
 );
 
--- Batch Orders Table
 CREATE TABLE batch_orders (
     id VARCHAR(255) PRIMARY KEY,
     supplier_id VARCHAR(255),
@@ -192,7 +185,6 @@ CREATE TABLE batch_orders (
     FOREIGN KEY (supplier_id) REFERENCES suppliers(id)
 );
 
--- Medicines Table
 CREATE TABLE medicines (
     id VARCHAR(255) PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
@@ -201,7 +193,6 @@ CREATE TABLE medicines (
     FOREIGN KEY (batch_order_id) REFERENCES batch_orders(id)
 );
 
--- Inventory Table
 CREATE TABLE inventory (
     id VARCHAR(255) PRIMARY KEY,
     warehouse_id VARCHAR(255),
@@ -211,16 +202,14 @@ CREATE TABLE inventory (
     FOREIGN KEY (medicine_id) REFERENCES medicines(id)
 );
 
--- Orders Table
 CREATE TABLE orders (
     id VARCHAR(255) PRIMARY KEY,
     subsidiary_company_id VARCHAR(255),
     order_date DATE NOT NULL,
-    status VARCHAR(50),
+    status VARCHAR(50) NOT NULL,
     FOREIGN KEY (subsidiary_company_id) REFERENCES subsidiary_companies(id)
 );
 
--- Order Items Table
 CREATE TABLE order_items (
     id VARCHAR(255) PRIMARY KEY,
     order_id VARCHAR(255),
@@ -230,230 +219,110 @@ CREATE TABLE order_items (
     FOREIGN KEY (medicine_id) REFERENCES medicines(id)
 );
 
--- Shipments Table
-CREATE TABLE shipments (
-    id VARCHAR(255) PRIMARY KEY,
-    order_id VARCHAR(255),
-    shipment_date DATE NOT NULL,
-    distributor_id VARCHAR(255),
-    FOREIGN KEY (order_id) REFERENCES orders(id),
-    FOREIGN KEY (distributor_id) REFERENCES distributors(id)
-);
-
--- Distributors Table
-CREATE TABLE distributors (
-    id VARCHAR(255) PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    contact_info VARCHAR(255) NOT NULL
-);
-
--- Users Table
 CREATE TABLE users (
     id VARCHAR(255) PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    position VARCHAR(255),
     username VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
     role_id VARCHAR(255),
     FOREIGN KEY (role_id) REFERENCES roles(id)
 );
 
--- Roles Table
 CREATE TABLE roles (
     id VARCHAR(255) PRIMARY KEY,
     name VARCHAR(255) NOT NULL
 );
-
--- Permissions Table
-CREATE TABLE permissions (
-    id VARCHAR(255) PRIMARY KEY,
-    name VARCHAR(255) NOT NULL
-);
-
--- Role-Permission Junction Table for Many-to-Many Relationship
-CREATE TABLE role_permissions (
-    role_id VARCHAR(255),
-    permission_id VARCHAR(255),
-    PRIMARY KEY (role_id, permission_id),
-    FOREIGN KEY (role_id) REFERENCES roles(id),
-    FOREIGN KEY (permission_id) REFERENCES permissions(id)
-);
 ```
 
-#### MongoDB
-```
-// Parent Companies Collection
-{
-  "parent_companies": [
-    {
-      "_id": "ObjectId('...')",
-      "name": "Parent Company Name",
-      "address": "Parent Company Address"
-    }
-  ]
-}
-
-// Subsidiary Companies Collection
-{
-  "subsidiary_companies": [
-    {
-      "_id": "ObjectId('...')",
-      "name": "Subsidiary Company Name",
-      "address": "Subsidiary Company Address",
-      "parent_company_id": "ObjectId('...')" // Reference to parent_companies
-    }
-  ]
-}
-
-// Warehouses Collection
-{
-  "warehouses": [
-    {
-      "_id": "ObjectId('...')",
-      "location": "Warehouse Location",
-      "subsidiary_company_id": "ObjectId('...')" // Reference to subsidiary_companies
-    }
-  ]
-}
-
-// Suppliers Collection
-{
-  "suppliers": [
-    {
-      "_id": "ObjectId('...')",
-      "name": "Supplier Name",
-      "contact_info": "Supplier Contact Info }
-  ]
-}
-
-// Batch Orders Collection
-{
-  "batch_orders": [
-    {
-      "_id": "ObjectId('...')",
-      "supplier_id": "ObjectId('...')", // Reference to suppliers
-      "order_date": "YYYY-MM-DD",
-      "delivery_date": "YYYY-MM-DD"
-    }
-  ]
-}
-
-// Medicines Collection
-{
-  "medicines": [
-    {
-      "_id": "ObjectId('...')",
-      "name": "Medicine Name",
-      "description": "Medicine Description",
-      "batch_order_id": "ObjectId('...')" // Reference to batch_orders
-    }
-  ]
-}
-
-// Inventory Collection
-{
-  "inventory": [
-    {
-      "_id": "ObjectId('...')",
-      "warehouse_id": "ObjectId('...')", // Reference to warehouses
-      "medicine_id": "ObjectId('...')", // Reference to medicines
-      "quantity": 0
-    }
-  ]
-}
-
-// Orders Collection
-{
-  "orders": [
-    {
-      "_id": "ObjectId('...')",
-      "subsidiary_company_id": "ObjectId('...')", // Reference to subsidiary_companies
-      "order_date": "YYYY-MM-DD",
-      "status": "Order Status"
-    }
-  ]
-}
-
-// Order Items Collection
-{
-  "order_items": [
-    {
-      "_id": "ObjectId('...')",
-      "order_id": "ObjectId('...')", // Reference to orders
-      "medicine_id": "ObjectId('...')", // Reference to medicines
-      "quantity": 0
-    }
-  ]
-}
-
-// Shipments Collection
-{
-  "shipments": [
-    {
-      "_id": "ObjectId('...')",
-      "order_id": "ObjectId('...')", // Reference to orders
-      "shipment_date": "YYYY-MM-DD",
-      "distributor_id": "ObjectId('...')" // Reference to distributors
-    }
-  ]
-}
-
-// Distributors Collection
-{
-  "distributors": [
-    {
-      "_id": "ObjectId('...')",
-      "name": "Distributor Name",
-      "contact_info": "Distributor Contact Info"
-    }
-  ]
-}
-
-// Users Collection
-{
-  "users": [
-    {
-      "_id": "ObjectId('...')",
-      "username": "User  Name",
-      "password": "User  Password",
-      "role_id": "ObjectId('...')" // Reference to roles
-    }
-  ]
-}
-
-// Roles Collection
-{
-  "roles": [
-    {
-      "_id": "ObjectId('...')",
-      "name": "Role Name"
-    }
-  ]
-}
-
-// Permissions Collection
-{
-  "permissions": [
-    {
-      "_id": "ObjectId('...')",
-      "name": "Permission Name"
-    }
-  ]
-}
-
-// Role-Permission Collection for Many-to-Many Relationship
-{
-  "role_permissions": [
-    {
-      "role_id": "ObjectId('...')", // Reference to roles
-      "permission_id": "ObjectId('...')" // Reference to permissions
-    }
-  ]
-}
-```
 ## 🧊 Data Insertion 
 
 #### MongoDB
 ```
-🚀 Coming Soon!!!
+// parent_companies collection
+{
+    "_id": "ObjectId()",
+    "name": "Company A",
+    "address": "123 Main St"
+}
+
+// subsidiary_companies collection
+{
+    "_id": "ObjectId()",
+    "name": "Subsidiary A",
+    "address": "456 Side St",
+    "parent_company_id": "ObjectId()" // Reference to parent_companies
+}
+
+// warehouses collection
+{
+    "_id": "ObjectId()",
+    "location": "Warehouse A",
+    "subsidiary_company_id": "ObjectId()" // Reference to subsidiary_companies
+}
+
+// suppliers collection
+{
+    "_id": "ObjectId()",
+    "name": "Supplier A",
+    "contact_info": "contact@supplier.com"
+}
+
+// batch_orders collection
+{
+    "_id": "ObjectId()",
+    "supplier_id": "ObjectId()", // Reference to suppliers
+    "order_date": "2023-01-01",
+    "delivery_date": "2023-01-10"
+}
+
+// medicines collection
+{
+    "_id": "ObjectId()",
+    "name": "Medicine A",
+    "description": "Description of Medicine A",
+    "batch_order_id": "ObjectId()" // Reference to batch_orders
+}
+
+// inventory collection
+{
+    "_id": "ObjectId()",
+    "warehouse_id": "ObjectId()", // Reference to warehouses
+    "medicine_id": "ObjectId()", // Reference to medicines
+    "quantity": 100
+}
+
+// orders collection
+{
+    "_id": "ObjectId()",
+    "subsidiary_company_id": "ObjectId()", // Reference to subsidiary_companies
+    "order_date": "2023-01-01",
+    "status": "Pending"
+}
+
+// order_items collection
+{
+    "_id": "ObjectId()",
+    "order_id": "ObjectId()", // Reference to orders
+    "medicine_id": "ObjectId()", // Reference to medicines
+    "quantity": 2
+}
+
+// users collection
+{
+    "_id": "ObjectId()",
+    "name": "User  A",
+    "position": "Manager",
+    "username": "usernameA",
+    "password": "hashed_password",
+    "role_id": "ObjectId()" // Reference to roles
+}
+
+// roles collection
+{
+    "_id": "ObjectId()",
+    "name": "Admin"
+}
 ```
 
 <!-- Data Model Image link down below -->
