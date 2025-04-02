@@ -418,7 +418,8 @@ If you would like to contribute to the Flight Booking App, please follow these s
 ### 👋 Contributors
 ### Special thanks to all my groupmates: 
  * ####  😎 [Jay Arre Talosig](https://github.com/flexycode) - Machine Learning Engineer | Blockchain Developer | Bioinformatics Scientist | Blackhat
- * ####  🎲 [Brian De Vera](https://github.com/scarfer14) - Network Security Engineer | Cyber Security Engineer | Robotics Engineer | Whitehat   
+ * ####  🎲 [Brian De Vera](https://github.com/scarfer14) - Network Security Engineer | Cyber Security Engineer | Robotics Engineer | Whitehat
+ * ####  🛸 [Anthonee Buno](https://github.com/leirk04) - Software Engineer  
  * ####  🤖 [Chloe from Cyberlife](https://calixtojj.github.io/detroit/char/chloe.html) - Necromancer | A Machine | Deviant
 
 
