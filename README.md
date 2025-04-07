@@ -493,6 +493,10 @@ Chronological list of updates, bug fixes, new features, and other modifications 
 - ✨ Add Database Schema for SQL
 - ✨ Add Database Schema for MongoDB
 
+## [1.0.1] - 2025-04-07   
+### Added  
+- ✨ Create Frontend 
+
 🧊 CTFDMBSL
 
 <!-- Introduction Pannel button link, it will redirect to the top -->
