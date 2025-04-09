@@ -10,6 +10,7 @@ export function useAuth() {
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   
   useEffect(() => {
     const fetchUser = async () => {
@@ -17,7 +18,7 @@ export function AuthProvider({ children }) {
         const user = await getCurrentUser();
         setCurrentUser(user);
       } catch (error) {
-        console.error("Error fetching current user:", error);
+        console.log("Not authenticated or server not available");
         setCurrentUser(null);
       } finally {
         setLoading(false);
@@ -28,33 +29,46 @@ export function AuthProvider({ children }) {
   }, []);
   
   const login = async (email, password) => {
-    const user = await loginUser(email, password);
-    setCurrentUser(user);
-    return user;
+    try {
+      setError(null);
+      const user = await loginUser(email, password);
+      setCurrentUser(user);
+      return user;
+    } catch (err) {
+      setError(err.message);
+      throw err;
+    }
   };
   
   const register = async (userData) => {
-    const user = await registerUser(userData);
-    setCurrentUser(user);
-    return user;
+    try {
+      setError(null);
+      const user = await registerUser(userData);
+      setCurrentUser(user);
+      return user;
+    } catch (err) {
+      setError(err.message);
+      throw err;
+    }
   };
   
-  const logout = async () => {
-    await logoutUser();
+  const logout = () => {
+    logoutUser();
     setCurrentUser(null);
   };
   
   const value = {
     currentUser,
+    loading,
+    error,
     login,
     register,
-    logout,
-    loading
+    logout
   };
   
   return (
     <AuthContext.Provider value={value}>
-      {!loading && children}
+      {children}
     </AuthContext.Provider>
   );
 }
