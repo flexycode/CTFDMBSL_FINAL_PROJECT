@@ -63,7 +63,8 @@ The Pharmaceutical Supply Chain Management application serves as a comprehensive
 <!-- Techstacks down below (temporary need some proper decision for the group team in order to inlign for the project -->
 ## 💻 Techstacks # 1
  
-* **Frontend:** [React.js](https://react.dev/), HTML5, CSS3 + 
+* **Frontend:** [React.js](https://react.dev/), HTML5, CSS3 +
+* **Build tool and Development server:** [Vite](https://vite.dev/)
 * **Backend:** [Node.js](https://nodejs.org/en) with [Express.js](https://expressjs.com/)
 * **Database:** [Supabase](https://supabase.com/)
 * **AI Integration:** TensorFlow, Scikit-learn
