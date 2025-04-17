@@ -62,19 +62,14 @@ The Pharmaceutical Supply Chain Management application serves as a comprehensive
 
 <!-- Techstacks down below (temporary need some proper decision for the group team in order to inlign for the project -->
 ## 💻 Techstacks # 1
- 
+
+* **Programming Language:** [TypeScript](https://www.typescriptlang.org/) 
 * **Frontend:** [React.js](https://react.dev/), HTML5, CSS3 +
 * **Build tool and Development server:** [Vite](https://vite.dev/)
 * **Backend:** [Node.js](https://nodejs.org/en) with [Express.js](https://expressjs.com/)
 * **Database:** [Supabase](https://supabase.com/)
-* **AI Integration:** TensorFlow, Scikit-learn
-* **Blockchain:** Ethereum, Smart Contracts
-* **Payment Gateway:** Stripe, Paypal
 
-## 💻 Techstacks # 2
-* **Frontend:** [React.js](https://react.dev/), HTML5, CSS3
-* **Backend:** Python with Flask or Django
-* **Database:** [MongoDB](https://www.mongodb.com/)
+## 🚀 Future Features
 * **AI Integration:** TensorFlow, Scikit-learn
 * **Blockchain:** Ethereum, Smart Contracts
 * **Payment Gateway:** Stripe, Paypal
@@ -496,7 +491,19 @@ Chronological list of updates, bug fixes, new features, and other modifications 
 
 ## [1.0.1] - 2025-04-07   
 ### Added  
-- ✨ Create Frontend 
+- ✨ Create Frontend
+
+## [2.0.1] - 2025-04-17   
+### Added  
+- ✨ Develop Homepage of PharmaXLedger
+- ✨ Design a Wireframe for MedicineCatalog and ShoppingCart
+- ✨ Develop AdminDashboard and LandingPage
+- ✨ Added a setup and integration for Supabase
+- ✨ Added Sign Up Form
+- ✨ Added a MedicineForm
+### Added 
+- ✨ Fixed bug on ShoppingCart
+- ✨ Fix bug regarding on SignIn and SignOut
 
 🧊 CTFDMBSL
 
