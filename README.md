@@ -158,6 +158,16 @@ You'll need to replace these values with your actual Supabase credentials. To ge
 * **VITE_SUPABASE_URL:** Your Supabase project URL
 * **VITE_SUPABASE_ANON_KEY:** Your Supabase project's anonymous key (public key)
 * **VITE_TEMPO:** A flag for development tools (set to false by default)
+* **SUPABASE_PROJECT_ID:**
+
+#### .env
+```
+VITE_SUPABASE_URL=
+VITE_SUPABASE_ANON_KEY=
+VITE_TEMPO=false
+SUPABASE_PROJECT_ID=
+```
+
 
 ### 4️⃣ Run the application
 
@@ -306,8 +316,63 @@ Full Overview of Normalization is in the Folder of documentation
 ```
 CTFDMBSL_FINAL_PROJECT/
 │
-├── LICENSE
+├── .env
 ├── README.md
+├── components.json
+├── index.html
+├── package.json
+├── package-lock.json
+├── postcss.config.js
+├── tailwind.config.js
+├── tsconfig.json
+├── tsconfig.node.json
+├── vite.config.ts
+├── public/
+│   └── vite.svg
+└── src/
+│    ├── App.tsx
+│    ├── main.tsx
+│    ├── index.css
+│    ├── vite-env.d.ts
+│    ├── assets/
+│    │   ├── README.md
+│    │   └── medicines/
+│    │       ├── components/
+│    │       ├── AboutPage.tsx
+│    │       ├── AdminDashboard.tsx
+│    │       ├── LandingPage.tsx
+│    │       ├── LearnMore.tsx
+│    │       ├── MedicineCard.tsx
+│    │       ├── MedicineCatalog.tsx
+│    │       ├── MedicineForm.tsx
+│    │       ├── ShoppingCart.tsx
+│    │       ├── SignIn.tsx
+│    │       ├── SignUp.tsx
+│    │       ├── home.tsx
+│    │       └── ui/
+│    │           ├── lib/
+│    │           └── utils.ts
+│    ├── stories/
+│    │   ├── accordion.stories.tsx
+│    │   ├── alert-dialog.stories.tsx
+│    │   ├── alert.stories.tsx
+│    │   ├── aspect-ratio.stories.tsx
+│    │   ├── avatar.stories.tsx
+│    │   ├── badge.stories.tsx
+│    │   ├── button.stories.tsx
+│    │   ├── calendar.stories.tsx
+│    │   ├── card.stories.tsx
+│    │   ├── carousel.stories.tsx
+│    │   └── ... (more story files)
+│    └── types/
+└── supabase/
+    └── migrations/
+        ├── 20240415000001_create_medicines_table.sql
+        ├── 20240416000001_update_medicines_table.sql
+        ├── 20240417000001_create_orders_table.sql
+        ├── 20240418000001_create_companies_table.sql
+        ├── 20240419000001_create_warehouses_table.sql
+        └── 20240420000001_create_suppliers_table.sql
 ```
 
 <!-- 🏆 Contributers down below -->
