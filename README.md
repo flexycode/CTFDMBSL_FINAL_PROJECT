@@ -66,8 +66,8 @@ The Pharmaceutical Supply Chain Management application serves as a comprehensive
 * **Programming Language:** [TypeScript](https://www.typescriptlang.org/) 
 * **Frontend:** [React.js](https://react.dev/), HTML5, CSS3 +
 * **Build tool and Development server:** [Vite](https://vite.dev/)
-* **Backend:** [Node.js](https://nodejs.org/en) with [Express.js](https://expressjs.com/)
-* **Database:** [Supabase](https://supabase.com/)
+* **Backend:** [[Supabase](https://supabase.com/)
+* **Database:** SQL / Posgresql integrated in Supabase
 
 ## 🚀 Future Features
 * **AI Integration:** TensorFlow, Scikit-learn
@@ -75,17 +75,100 @@ The Pharmaceutical Supply Chain Management application serves as a comprehensive
 * **Payment Gateway:** Stripe, Paypal
 
 
-## 🕵️ Framework Optioons:
-* **Flask:** A lightweight and flexible micro-framework that is great for building APIs and web applications quickly. 
-* **Django:** A high-level web framework that encourages rapid development and clean, pragmatic design. It comes with built-in features like an admin panel, ORM, and authentication.
+## 🕵️ PharmaXLedger Several key Features:
 
-Using Python for the backend can provide you with a robust and scalable solution. It also has a rich ecosystem of libraries for AI and data processing, making it a great choice for the project.
+**1. Supply Chain Management:**
+* Tracks medicines from suppliers through warehouses to end customers
+* Manages inventory across multiple warehouses
+* Handles both parent companies and subsidiaries
+* Processes batch orders and customer orders
+
+**2. Medicine Management:**
+* Comprehensive medicine catalog with detailed information
+* Tracks dosage, form, origin, and manufacturer
+* Real-time inventory tracking
+* Price and stock management
+
+**3. User Interface:**
+* Modern, responsive design using Radix UI components
+* Role-based access with admin and user views
+* Shopping cart functionality for orders
+* Detailed admin dashboard for supply chain oversight
+
+**4. Security and Data Management:**
+* Authentication system for users
+* Row-level security in the database
+* Real-time updates for inventory changes
+* Comprehensive audit trails with timestamps
+
+**5. Technical Implementation:**
+* React with TypeScript for type safety
+* Supabase for backend services
+* TailwindCSS for styling
+* Modern component architecture
+* Environment-based configuration
 
 
 # 💻 How to Run this Application
 
+
+### 1️⃣👷 First, let's check the package.json scripts we saw earlier and then set up the necessary environment variables.
+
+From the package.json, we know this is a Vite application with the following scripts:
 ```
-🚀 Coming Soon!!!
+dev: For development
+build: For production build
+preview: For previewing the build
+```
+Before running the app, we need to ensure we have:
+
+1. Node modules installed
+2. Environment variables set up (particularly for Supabase)
+
+Let me help you set these up:
+
+### 2️⃣🚀 Second, let's install the dependencies:
+
+```
+npm install
+```
+
+### 3️⃣🚍 After installing dependencies, we need to set up the environment variables (.env) for Supabase
+
+```
+ls -la | grep .env
+```
+
+#### A. Create a `.env` file in the root directory:
+You'll need to replace these values with your actual Supabase credentials. To get these credentials:
+1. Go to [supabase](https://supabase.com)
+2. Sign up/Login to your account
+3. Create a new project or use an existing one
+4. Once in your project:
+   * The `VITE_SUPABASE_URL` can be found in Project Settings > API > Project URL
+   * The `VITE_SUPABASE_ANON_KEY` can be found in Project Settings > API > anon/public
+
+#### B. After setting up your Supabase project, you'll need to:
+1. Run the database migrations that are in the `/supabase/migrations` folder in your Supabase project
+
+2. Replace the placeholder values in the `.env` file with your actual Supabase credentials
+
+#### C. Here's what each environment variable is for:
+
+* **VITE_SUPABASE_URL:** Your Supabase project URL
+* **VITE_SUPABASE_ANON_KEY:** Your Supabase project's anonymous key (public key)
+* **VITE_TEMPO:** A flag for development tools (set to false by default)
+
+### 4️⃣ Run the application
+
+Once you have:
+1. Installed the dependencies (`npm install`)
+2. Set up your Supabase project
+3. Added your Supabase credentials to the `.env` file
+
+You can then run the application in development mode with:
+```
+npm run dev
 ```
 
 <!-- Techstacks down below (temporary need some proper decision for the group team in order to inlign for the project
@@ -131,13 +214,13 @@ Connect MySQL dbs through Database repository folder
 <img src="https://github.com/flexycode/CTINFMGL_FINAL_PROJECT/blob/main/assets/Front%20Page.png" />
 -->
 
-### 🌟 Search Flight
+### 🌟 Medicine Catalog
 
 <!-- Search Flight 
 <img src="https://github.com/flexycode/CTINFMGL_FINAL_PROJECT/blob/main/assets/Search%20Flight.png" />
 -->
 
-### 🌟 Background Video 
+### 🌟 PharmaXLedger Dashboard
 
 <!-- Background Video 
 <img src="https://github.com/flexycode/CTINFMGL_FINAL_PROJECT/blob/main/assets/Video%20Page.png" />
@@ -148,177 +231,14 @@ Connect MySQL dbs through Database repository folder
 
 #### SQL
 ```
-CREATE TABLE parent_companies (
-    id VARCHAR(255) PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    address VARCHAR(255) NOT NULL
-);
-
-CREATE TABLE subsidiary_companies (
-    id VARCHAR(255) PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    address VARCHAR(255) NOT NULL
-);
-
-CREATE TABLE warehouses (
-    id VARCHAR(255) PRIMARY KEY,
-    location VARCHAR(255) NOT NULL,
-    subsidiary_company_id VARCHAR(255),
-    FOREIGN KEY (subsidiary_company_id) REFERENCES subsidiary_companies(id)
-);
-
-CREATE TABLE suppliers (
-    id VARCHAR(255) PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    contact_info VARCHAR(255) NOT NULL
-);
-
-CREATE TABLE batch_orders (
-    id VARCHAR(255) PRIMARY KEY,
-    supplier_id VARCHAR(255),
-    order_date DATE NOT NULL,
-    delivery_date DATE NOT NULL,
-    FOREIGN KEY (supplier_id) REFERENCES suppliers(id)
-);
-
-CREATE TABLE medicines (
-    id VARCHAR(255) PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    description TEXT,
-    batch_order_id VARCHAR(255),
-    FOREIGN KEY (batch_order_id) REFERENCES batch_orders(id)
-);
-
-CREATE TABLE inventory (
-    id VARCHAR(255) PRIMARY KEY,
-    warehouse_id VARCHAR(255),
-    medicine_id VARCHAR(255),
-    quantity INT NOT NULL,
-    FOREIGN KEY (warehouse_id) REFERENCES warehouses(id),
-    FOREIGN KEY (medicine_id) REFERENCES medicines(id)
-);
-
-CREATE TABLE orders (
-    id VARCHAR(255) PRIMARY KEY,
-    subsidiary_company_id VARCHAR(255),
-    order_date DATE NOT NULL,
-    status VARCHAR(50) NOT NULL,
-    FOREIGN KEY (subsidiary_company_id) REFERENCES subsidiary_companies(id)
-);
-
-CREATE TABLE order_items (
-    id VARCHAR(255) PRIMARY KEY,
-    order_id VARCHAR(255),
-    medicine_id VARCHAR(255),
-    quantity INT NOT NULL,
-    FOREIGN KEY (order_id) REFERENCES orders(id),
-    FOREIGN KEY (medicine_id) REFERENCES medicines(id)
-);
-
-CREATE TABLE users (
-    id VARCHAR(255) PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    position VARCHAR(255),
-    username VARCHAR(255) NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    role_id VARCHAR(255),
-    FOREIGN KEY (role_id) REFERENCES roles(id)
-);
-
-CREATE TABLE roles (
-    id VARCHAR(255) PRIMARY KEY,
-    name VARCHAR(255) NOT NULL
-);
+Cumming Soon
 ```
 
-## 🧊 Data Insertion 
+## 🧊 Data Integration in Supabase
 
-#### MongoDB
+#### PosgresSQL
 ```
-// parent_companies collection
-{
-    "_id": "ObjectId()",
-    "name": "Company A",
-    "address": "123 Main St"
-}
-
-// subsidiary_companies collection
-{
-    "_id": "ObjectId()",
-    "name": "Subsidiary A",
-    "address": "456 Side St",
-    "parent_company_id": "ObjectId()" // Reference to parent_companies
-}
-
-// warehouses collection
-{
-    "_id": "ObjectId()",
-    "location": "Warehouse A",
-    "subsidiary_company_id": "ObjectId()" // Reference to subsidiary_companies
-}
-
-// suppliers collection
-{
-    "_id": "ObjectId()",
-    "name": "Supplier A",
-    "contact_info": "contact@supplier.com"
-}
-
-// batch_orders collection
-{
-    "_id": "ObjectId()",
-    "supplier_id": "ObjectId()", // Reference to suppliers
-    "order_date": "2023-01-01",
-    "delivery_date": "2023-01-10"
-}
-
-// medicines collection
-{
-    "_id": "ObjectId()",
-    "name": "Medicine A",
-    "description": "Description of Medicine A",
-    "batch_order_id": "ObjectId()" // Reference to batch_orders
-}
-
-// inventory collection
-{
-    "_id": "ObjectId()",
-    "warehouse_id": "ObjectId()", // Reference to warehouses
-    "medicine_id": "ObjectId()", // Reference to medicines
-    "quantity": 100
-}
-
-// orders collection
-{
-    "_id": "ObjectId()",
-    "subsidiary_company_id": "ObjectId()", // Reference to subsidiary_companies
-    "order_date": "2023-01-01",
-    "status": "Pending"
-}
-
-// order_items collection
-{
-    "_id": "ObjectId()",
-    "order_id": "ObjectId()", // Reference to orders
-    "medicine_id": "ObjectId()", // Reference to medicines
-    "quantity": 2
-}
-
-// users collection
-{
-    "_id": "ObjectId()",
-    "name": "User  A",
-    "position": "Manager",
-    "username": "usernameA",
-    "password": "hashed_password",
-    "role_id": "ObjectId()" // Reference to roles
-}
-
-// roles collection
-{
-    "_id": "ObjectId()",
-    "name": "Admin"
-}
+Cumming Soon
 ```
 
 <!-- Data Model Image link down below -->
@@ -504,6 +424,11 @@ Chronological list of updates, bug fixes, new features, and other modifications 
 ### Added 
 - ✨ Fixed bug on ShoppingCart
 - ✨ Fix bug regarding on SignIn and SignOut
+
+## [2.0.1] - 2025-04-19   
+### Added  
+- ✨ Develop Private Repo for PharmaXLedger (will transfer here once finish)
+- ✨ Add procedure on how to run the application
 
 🧊 CTFDMBSL
 
