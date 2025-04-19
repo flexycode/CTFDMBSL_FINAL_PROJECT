@@ -486,7 +486,7 @@ Chronological list of updates, bug fixes, new features, and other modifications 
 - ✨ Added a setup and integration for Supabase
 - ✨ Added Sign Up Form
 - ✨ Added a MedicineForm
-### Added 
+### Fixed 
 - ✨ Fixed bug on ShoppingCart
 - ✨ Fix bug regarding on SignIn and SignOut
 
@@ -494,6 +494,8 @@ Chronological list of updates, bug fixes, new features, and other modifications 
 ### Added  
 - ✨ Develop Private Repo for PharmaXLedger (will transfer here once finish)
 - ✨ Add procedure on how to run the application
+### Fixed 
+- ✨ Fix issues in ShoppingCart.tsx
 
 🧊 CTFDMBSL
 
