@@ -1,30 +1,64 @@
-# React + TypeScript + Vite
+# PharmaXLedger
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+PharmaXLedger is a modern web application for pharmaceutical inventory and sales management. Built with React, TypeScript, Vite, and Tailwind CSS, it provides a robust platform for pharmacies and distributors to manage medicine catalogs, inventory, and orders efficiently.
 
-Currently, two official plugins are available:
+## Features
+- Medicine catalog browsing and search
+- Inventory management dashboard (admin)
+- Shopping cart for users
+- Category-based filtering
+- Responsive UI with modern design
+- Built using React, Vite, TypeScript, and Tailwind CSS
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Project Structure
+- `/src/components` - React components for UI, dashboard, catalog, cart, etc.
+- `/public` - Static assets
+- `index.html` - Main HTML entry point
+- `package.json` - Project dependencies and scripts
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Prerequisites
+- Node.js (v18 or newer recommended)
+- npm (v9 or newer)
 
-- Configure the top-level `parserOptions` property like this:
+### Installation
+1. Clone the repository:
+   ```bash
+   git clone <repo-url>
+   cd CTFDMBSL_FINAL_PROJECT
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+### Running the Application
+Start the development server with hot reload:
+```bash
+npm run dev
+```
+The app will be available at `http://localhost:5173` by default.
+
+### Building for Production
+To build the app for production:
+```bash
+npm run build
+```
+The output will be in the `dist` directory.
+
+### Preview Production Build
+To preview the production build locally:
+```bash
+npm run preview
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Technologies Used
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
+- Radix UI
+
+## License
+This project is for demonstration and educational purposes.
