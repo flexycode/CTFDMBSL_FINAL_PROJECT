@@ -10,6 +10,7 @@
 ### Professor: [Mrs. Jensen A. Santillan](https://www.youtube.com/watch?v=_kUFws-dHEI)     
 ### No. of Units: [3 Units](https://www.youtube.com/watch?v=HNefNLOHVYk)
 ### Prerequisite: [CTINFMGL - INFORMATION MANAGEMENT](https://github.com/flexycode/CTINFMGL)
+### Project Link: [PharmaXLedger Project Link](https://github.com/flexycode/PharmaXLedger)
 
 <!-- Genshin Impact -->
 <div align="center">
@@ -69,9 +70,9 @@ The Pharmaceutical Supply Chain Management application serves as a comprehensive
 * **Backend:** [[Supabase](https://supabase.com/)
 * **Database:** SQL / Posgresql integrated in Supabase
 
-## 🚀 Future Features
+## 🚀 Future Features Use case
 * **AI Integration:** TensorFlow, Scikit-learn
-* **Blockchain:** Ethereum, Smart Contracts
+* **Blockchain:** Ethereum, Smart Contracts, Solidity, DeFi
 * **Payment Gateway:** Stripe, Paypal
 
 
