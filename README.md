@@ -497,7 +497,7 @@ Chronological list of updates, bug fixes, new features, and other modifications 
 - ✨ Add procedure on how to run the application
 ### Fixed 
 - ✨ Fix issues in ShoppingCart.tsx
-
+-   Full revision
 🧊 CTFDMBSL
 
 <!-- Introduction Pannel button link, it will redirect to the top -->
