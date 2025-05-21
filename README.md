@@ -233,13 +233,32 @@ Connect MySQL dbs through Database repository folder
 🚀 Coming Soon!!!
 ```
 
-<img src="https://github.com/flexycode/CTINFMGL_FINAL_PROJECT/blob/main/assets/Search%20Flight.png" />
-
-
 ### 🌟 PharmaXLedger Dashboard
 
 <img src="https://github.com/flexycode/CTFDMBSL_FINAL_PROJECT/blob/main/assets/pharmaxledger/pharmaxledger-2.png" />
 
+### 🌟 Inventory
+
+```
+🚀 Coming Soon!!!
+```
+
+### 🌟 Account Settings
+
+<img src="https://github.com/flexycode/CTFDMBSL_FINAL_PROJECT/blob/main/assets/pharmaxledger/pharmaxledger-3.png" />
+
+<img src="https://github.com/flexycode/CTFDMBSL_FINAL_PROJECT/blob/main/assets/pharmaxledger/pharmaxledger-4.png" />
+
+<img src="https://github.com/flexycode/CTFDMBSL_FINAL_PROJECT/blob/main/assets/pharmaxledger/pharmaxledger-5.png" />
+
+<img src="https://github.com/flexycode/CTFDMBSL_FINAL_PROJECT/blob/main/assets/pharmaxledger/pharmaxledger-6.png" />
+
+<img src="https://github.com/flexycode/CTFDMBSL_FINAL_PROJECT/blob/main/assets/pharmaxledger/pharmaxledger-7.png" />
+
+<img src="https://github.com/flexycode/CTFDMBSL_FINAL_PROJECT/blob/main/assets/pharmaxledger/pharmaxledger-8.png" />
+
+### 🌟 Customer Support
+<img src="https://github.com/flexycode/CTFDMBSL_FINAL_PROJECT/blob/main/assets/pharmaxledger/pharmaxledger-9.png" />
 
 <!-- Database Schema Revision, Also image for Data Model and Entity Relationship Diagram ERD. Link should be point out through assets folder for editing README.md -->
 ## 🧊 Database Schema
@@ -320,65 +339,7 @@ Full Overview of Normalization is in the Folder of documentation
 <!-- 📜 Folder Structure down below -->
 # 📁 Repository Structure
 ```
-CTFDMBSL_FINAL_PROJECT/
-│
-├── .env
-├── README.md
-├── components.json
-├── index.html
-├── package.json
-├── package-lock.json
-├── postcss.config.js
-├── tailwind.config.js
-├── tsconfig.json
-├── tsconfig.node.json
-├── vite.config.ts
-├── public/
-│   └── vite.svg
-└── src/
-│    ├── App.tsx
-│    ├── main.tsx
-│    ├── index.css
-│    ├── vite-env.d.ts
-│    ├── assets/
-│    │   ├── README.md
-│    │   └── medicines/
-│    │       ├── components/
-│    │       ├── AboutPage.tsx
-│    │       ├── AdminDashboard.tsx
-│    │       ├── LandingPage.tsx
-│    │       ├── LearnMore.tsx
-│    │       ├── MedicineCard.tsx
-│    │       ├── MedicineCatalog.tsx
-│    │       ├── MedicineForm.tsx
-│    │       ├── ShoppingCart.tsx
-│    │       ├── SignIn.tsx
-│    │       ├── SignUp.tsx
-│    │       ├── home.tsx
-│    │       └── ui/
-│    │           ├── lib/
-│    │           └── utils.ts
-│    ├── stories/
-│    │   ├── accordion.stories.tsx
-│    │   ├── alert-dialog.stories.tsx
-│    │   ├── alert.stories.tsx
-│    │   ├── aspect-ratio.stories.tsx
-│    │   ├── avatar.stories.tsx
-│    │   ├── badge.stories.tsx
-│    │   ├── button.stories.tsx
-│    │   ├── calendar.stories.tsx
-│    │   ├── card.stories.tsx
-│    │   ├── carousel.stories.tsx
-│    │   └── ... (more story files)
-│    └── types/
-└── supabase/
-    └── migrations/
-        ├── 20240415000001_create_medicines_table.sql
-        ├── 20240416000001_update_medicines_table.sql
-        ├── 20240417000001_create_orders_table.sql
-        ├── 20240418000001_create_companies_table.sql
-        ├── 20240419000001_create_warehouses_table.sql
-        └── 20240420000001_create_suppliers_table.sql
+coming soon
 ```
 
 <!-- 🏆 Contributers down below -->
