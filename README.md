@@ -22,7 +22,11 @@
 <!-- Introduction down below -->
 # 🧠 [Introduction](#introduction)
 
-The Pharmaceutical Supply Chain Management web application is designed to streamline the internal distribution of generic medicines within healthcare facilities. By leveraging cutting-edge technologies such as Artificial Intelligence and Blockchain, our platform ensures secure, efficient, and transparent management of pharmaceutical products.
+### PharmaXLedger
+
+PharmaXLedger is a comprehensive pharmaceutical supply chain management platform that leverages modern web technologies to provide secure, transparent tracking and management of pharmaceutical shipments.
+
+<img src="https://github.com/flexycode/CTFDMBSL_FINAL_PROJECT/blob/main/assets/pharmaxledger/pharmaceutical.png" />
 
 ## 🏦 Case Study: Pharmaceutical Supply Chain Management
 
@@ -30,36 +34,32 @@ The Pharmaceutical Supply Chain Management web application is designed to stream
 The Pharmaceutical Supply Chain Management application serves as a comprehensive solution for managing the distribution of generic medicines. It features a user-friendly interface that allows healthcare professionals to search for products, inquire about availability, and make purchases seamlessly. The application also includes robust classification systems for different types of medications, ensuring that users can easily find what they need. Our goal is to revolutionize the pharmaceutical supply chain by enhancing efficiency, security, and accessibility.
 
 <!-- Key Features -->
-## ✨ Key Features
 
-🚀 1. **Search Bar:** A powerful search functionality that allows users to quickly find products based on name, type, or classification.
+## ✨ Introduction
 
-🚀 2. **Product Inquiry:** Users can inquire about product availability, pricing, and other details for both over-the-counter and prescription medications.
+**Project Overview:** PharmaXLedger is an internal web-based supply chain management system designed for a group of pharmaceutical companies, including a parent company and its subsidiaries. It facilitates real-time inventory tracking, supplier coordination, and seamless order processing within a secure, private environment.
 
-🚀 3. **Product Sales:** A dedicated section for purchasing products, ensuring a smooth transaction process.
+**Problem Statement:** The pharmaceutical industry faces significant challenges in supply chain management, including:
+- Lack of real-time visibility across the entire supply chain
+- Data silos between different departments and subsidiary companies
+- Inefficient manual tracking processes leading to errors and delays
+- Compliance risks due to inadequate documentation and tracking
+- Difficulty in quickly responding to supply chain disruptions
 
-🚀 4. **Classification System:** Products are categorized into Over the Counter and Prescription Products for easy navigation.
+**Objectives:**
 
-🚀 5. **Diverse Product Types:** Comprehensive listings of various medication types, including:
-* Analgesics
-* Anti-anemic Preparations
-* Antibiotics
-* Antidiabetics
-* Cardiovascular Medication
-* Cough and Colds Medications
-* Gastrointestinal Medications
-* Medical Devices and Supplies
-* Nose and Throat Preparations
-* OB Preparations
-* Pediatric Preparations
-* Steroids
-* Vitamins, Minerals, and Dietary Supplements
+**General Objective:**
+To develop a centralized, real-time pharmaceutical supply chain management system for internal use across a network of related companies.
 
-🚀 6. **AI-Powered Recommendations:** Utilizing AI algorithms to suggest products based on user preferences and past inquiries, enhancing the user experience.
+**Specific Objectives:**
+- Implement end-to-end tracking of pharmaceutical products from manufacturer to end customer
+- Create a secure, role-based access control system for different stakeholders
+- Enable real-time notifications and alerts for critical supply chain events
+- Generate comprehensive analytics and reports for inventory, shipment, and compliance tracking
+- Design a relational database that maintains relationships between entities while ensuring data integrity
+- Facilitate seamless communication between different departments and subsidiary companies
+- Ensure regulatory compliance through proper documentation and audit trails
 
-🚀 7. **Blockchain Technology:** Ensuring secure transactions and traceability of products throughout the supply chain, providing transparency and trust.
-
-🚀 8. **Admin Dashboard:** A robust admin panel for managing product listings, user accounts, and transaction records.
 
 <!-- Techstacks down below (temporary need some proper decision for the group team in order to inlign for the project -->
 ## 💻 Techstacks # 1
@@ -76,39 +76,241 @@ The Pharmaceutical Supply Chain Management application serves as a comprehensive
 * **Payment Gateway:** Stripe, Paypal
 
 
-## 🕵️ PharmaXLedger Several key Features:
+## Table of Contents
+- [Features](#features)
+- [Technology Stack](#technology-stack)
+- [System Design](#system-design)
+- [Implementation](#implementation)
+- [Evaluation](#evaluation)
+- [System Architecture](#system-architecture)
+- [Database Schema (ERD)](#database-schema)
+- [Getting Started](#getting-started)
+- [Authentication](#authentication)
+- [User Roles](#user-roles)
+- [Application Flow](#application-flow)
+- [Contributing](#contributing)
 
-**1. Supply Chain Management:**
-* Tracks medicines from suppliers through warehouses to end customers
-* Manages inventory across multiple warehouses
-* Handles both parent companies and subsidiaries
-* Processes batch orders and customer orders
+## Features
 
-**2. Medicine Management:**
-* Comprehensive medicine catalog with detailed information
-* Tracks dosage, form, origin, and manufacturer
-* Real-time inventory tracking
-* Price and stock management
+- **Secure Authentication**: Email/password authentication with role-based access control
+- **Shipment Tracking**: Real-time tracking of pharmaceutical shipments
+- **Inventory Management**: Track and manage pharmaceutical inventory
+- **Admin Dashboard**: Comprehensive admin panel for system management
+- **User Management**: User registration and profile management
+- **Support System**: In-app support chat for user assistance
+- **Responsive Design**: Works seamlessly across desktop and mobile devices
 
-**3. User Interface:**
-* Modern, responsive design using Radix UI components
-* Role-based access with admin and user views
-* Shopping cart functionality for orders
-* Detailed admin dashboard for supply chain oversight
+## Technology Stack
 
-**4. Security and Data Management:**
-* Authentication system for users
-* Row-level security in the database
-* Real-time updates for inventory changes
-* Comprehensive audit trails with timestamps
+- **Frontend**:
+  - React 18 with TypeScript
+  - Tailwind CSS for styling
+  - Shadcn UI component library
+  - React Router for navigation
+  - Tanstack React Query for data fetching
 
-**5. Technical Implementation:**
-* React with TypeScript for type safety
-* Supabase for backend services
-* TailwindCSS for styling
-* Modern component architecture
-* Environment-based configuration
+- **Backend**:
+  - Supabase for authentication, database, and storage
+  - PostgreSQL database
+  - Supabase Edge Functions for serverless computing
 
+## System Design
+
+### 3.1 System Architecture
+
+PharmaXLedger implements a modern client-server architecture with a distributed database approach to handle pharmaceutical supply chain data. The system is designed with the following key architectural components:
+
+**Frontend Layer:**
+- React SPA with TypeScript providing a responsive user interface
+- Component-based architecture for reusability and maintainability
+- State management using React hooks and context API
+
+**API Layer:**
+- RESTful API services via Supabase
+- Authentication and authorization middleware
+- Data validation and transformation services
+
+**Database Layer:**
+- PostgreSQL relational database for structured data storage
+- Hybrid data distribution strategy:
+  - Vertical fragmentation for sensitive data (separating user profiles from transaction data)
+  - Selective replication for high-availability of critical data
+  - Query optimization through indexing and materialized views
+
+**Function Layer:**
+- Edge Functions for specialized business logic
+- Event-driven architecture for real-time updates
+- Background processing for report generation and analytics
+
+**Integration Points:**
+- External API connections for shipping carrier data
+- Webhook support for third-party integrations
+
+The system employs a hybrid data management approach:
+- **Relational Database Core:** Primary data storage using PostgreSQL
+- **Object-Relational Mapping:** TypeScript interfaces map database entities to application objects
+- **XML Data Exchange:** For interoperability with legacy pharmaceutical systems
+  - XML schemas defined for standardized data exchange
+  - XPath/XQuery for processing incoming XML data
+
+### 3.2 Design Diagrams
+
+**System Architecture Diagram:**
+
+```
+┌─────────────┐     ┌─────────────┐      ┌─────────────┐
+│             │     │             │      │             │
+│  React UI   │────▶│  Supabase   │◀────▶│ PostgreSQL  │
+│             │     │    API      │      │  Database   │
+└─────────────┘     └─────────────┘      └─────────────┘
+                           │
+                           ▼
+                    ┌─────────────┐
+                    │   Edge      │
+                    │  Functions  │
+                    └─────────────┘
+```
+
+**Data Flow Diagram:**
+
+```
+┌───────────┐      ┌───────────┐      ┌───────────┐      ┌───────────┐
+│           │      │           │      │           │      │           │
+│  Create   │─────▶│  Process  │─────▶│  Track    │─────▶│  Deliver  │
+│ Shipment  │      │   Order   │      │ Shipment  │      │ Products  │
+│           │      │           │      │           │      │           │
+└───────────┘      └───────────┘      └───────────┘      └───────────┘
+       │                                    │                   │
+       │                                    │                   │
+       ▼                                    ▼                   ▼
+┌───────────┐      ┌───────────┐      ┌───────────┐      ┌───────────┐
+│           │      │           │      │           │      │           │
+│ Inventory │      │ Payment   │      │ Tracking  │      │ Delivery  │
+│ Updates   │      │ Processing│      │ Events    │      │ Validation │
+│           │      │           │      │           │      │           │
+└───────────┘      └───────────┘      └───────────┘      └───────────┘
+```
+
+## Implementation
+
+### 4.1 Technology Stack
+
+PharmaXLedger leverages a modern technology stack optimized for web-based pharmaceutical supply chain management:
+
+**Frontend:**
+- React 18 with TypeScript for type safety and improved developer experience
+- Tailwind CSS for responsive, utility-first styling
+- Shadcn UI component library for consistent design language
+- React Router for client-side routing
+- Tanstack React Query for data fetching and state management
+
+**Backend:**
+- Supabase for authentication, database operations, and storage
+  - Row-Level Security (RLS) for granular data access control
+  - PostgreSQL database with PostGIS extensions for location tracking
+  - Real-time subscriptions for live updates
+- Edge Functions for specialized business logic and third-party integrations
+
+**DevOps:**
+- Git for version control
+- CI/CD pipeline for automated testing and deployment
+- Containerized development environment
+
+**Security:**
+- JWT-based authentication
+- Role-based access control
+- Data encryption for sensitive information
+- Audit logging for compliance tracking
+
+### 4.2 Implementation Process
+
+The implementation of PharmaXLedger followed an iterative development approach:
+
+**Phase 1: Planning and Architecture Design**
+- Requirements gathering from stakeholders
+- Database schema design and normalization
+- API endpoint definition
+- Component hierarchy planning
+
+**Phase 2: Core Implementation**
+- Database setup with initial schema and RLS policies
+- Authentication system implementation
+- Basic UI framework and navigation
+- Core data models and services
+
+**Phase 3: Feature Development**
+- Shipment tracking system with real-time updates
+- Inventory management functionality
+- Notification system for status changes
+- Reporting and analytics dashboard
+
+**Phase 4: Integration and Testing**
+- Third-party API integrations for shipping carriers
+- End-to-end testing of critical workflows
+- Performance optimization
+- Security auditing
+
+**Key Implementation Challenges and Solutions:**
+
+1. **Challenge:** Complex relational data model with multiple entities and relationships.
+   **Solution:** Implemented a normalized database schema with foreign key constraints and indices for performance.
+
+2. **Challenge:** Real-time tracking updates across multiple clients.
+   **Solution:** Leveraged Supabase's real-time subscription capabilities using PostgreSQL's LISTEN/NOTIFY.
+
+3. **Challenge:** Secure data access control based on user roles.
+   **Solution:** Implemented row-level security policies at the database level with role-specific access rules.
+
+4. **Challenge:** Performance issues with large shipment tracking logs.
+   **Solution:** Added pagination, implemented query optimization, and created materialized views for frequent reports.
+
+## Evaluation
+
+### 5.1 Evaluation Criteria
+
+PharmaXLedger was evaluated based on the following criteria:
+
+**Functional Requirements:**
+- Completeness of supply chain tracking features
+- Accuracy of shipment status updates
+- Reliability of notification system
+- Comprehensiveness of reporting capabilities
+
+**Non-functional Requirements:**
+- Performance: Response time under load
+- Scalability: Ability to handle growing data volume
+- Usability: Ease of use for different user roles
+- Security: Protection of sensitive data
+- Reliability: System uptime and data integrity
+
+**Integration Capability:**
+- Interoperability with external systems
+- API conformance to standards
+- Data exchange format compatibility
+
+### 5.2 Testing Methodology
+
+The evaluation employed a multi-tiered testing approach:
+
+**Unit Testing:**
+- Individual component testing using React Testing Library
+- API endpoint testing with automated test cases
+- Database query performance testing
+
+**Integration Testing:**
+- End-to-end workflow testing
+- API integration testing
+- Database transaction integrity testing
+
+**Performance Testing:**
+- Load testing with simulated concurrent users
+- Response time measurements under various loads
+- Database query execution time analysis
+
+**User Acceptance Testing:**
+- Stakeholder review sessions
+- Role-based testing scenarios
+- Interface usability assessment
 
 # 💻 How to Run this Application
 
