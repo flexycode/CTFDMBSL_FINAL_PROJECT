@@ -215,34 +215,39 @@ Connect MySQL dbs through Database repository folder
 <!-- Front-End Overview -->
 # 🚀 Screenshot of Project Overview
 
+<img src="https://github.com/flexycode/CTFDMBSL_FINAL_PROJECT/blob/main/assets/pharmaxledger/pharmaxledger.png" />
+
+### 🌟 Design Overview
+
+<img src="https://github.com/flexycode/CTFDMBSL_FINAL_PROJECT/blob/main/assets/pharmaxledger/pharmaxledger-0.png" />
+
+<img src="https://github.com/flexycode/CTFDMBSL_FINAL_PROJECT/blob/main/assets/pharmaxledger/pharmaxledger-1.png" />
+
+### 🌟 SignIn Page
 ```
 🚀 Coming Soon!!!
 ```
 
-### 🌟 Design Overview
+### 🌟 SignUp Page
+```
+🚀 Coming Soon!!!
+```
 
-<!-- Front Page 
-<img src="https://github.com/flexycode/CTINFMGL_FINAL_PROJECT/blob/main/assets/Front%20Page.png" />
--->
-
-### 🌟 Medicine Catalog
-
-<!-- Search Flight 
 <img src="https://github.com/flexycode/CTINFMGL_FINAL_PROJECT/blob/main/assets/Search%20Flight.png" />
--->
+
 
 ### 🌟 PharmaXLedger Dashboard
 
-<!-- Background Video 
-<img src="https://github.com/flexycode/CTINFMGL_FINAL_PROJECT/blob/main/assets/Video%20Page.png" />
--->
+<img src="https://github.com/flexycode/CTFDMBSL_FINAL_PROJECT/blob/main/assets/pharmaxledger/pharmaxledger-2.png" />
+
 
 <!-- Database Schema Revision, Also image for Data Model and Entity Relationship Diagram ERD. Link should be point out through assets folder for editing README.md -->
 ## 🧊 Database Schema
 
 #### SQL
+
 ```
-Cumming Soon
+🚀 Coming Soon!!!
 ```
 
 ## 🧊 Data Integration in Supabase
