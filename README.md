@@ -426,14 +426,12 @@ Connect MySQL dbs through Database repository folder
 <img src="https://github.com/flexycode/CTFDMBSL_FINAL_PROJECT/blob/main/assets/pharmaxledger/pharmaxledger-1.png" />
 
 ### 🌟 SignIn Page
-```
-🚀 Coming Soon!!!
-```
+
+<img src="https://github.com/flexycode/CTFDMBSL_FINAL_PROJECT/blob/main/assets/pharmaxledger/pharmaxledger-13.png" />
 
 ### 🌟 SignUp Page
-```
-🚀 Coming Soon!!!
-```
+
+<img src="https://github.com/flexycode/CTFDMBSL_FINAL_PROJECT/blob/main/assets/pharmaxledger/pharmaxledger-14.png" />
 
 ### 🌟 PharmaXLedger Dashboard
 
@@ -459,17 +457,25 @@ Connect MySQL dbs through Database repository folder
 
 <img src="https://github.com/flexycode/CTFDMBSL_FINAL_PROJECT/blob/main/assets/pharmaxledger/pharmaxledger-8.png" />
 
+### 🌟 Creating a Pharmaceutical Shipment
+
+<img src="https://github.com/flexycode/CTFDMBSL_FINAL_PROJECT/blob/main/assets/pharmaxledger/pharmaxledger-10.png" />
+
+### 🌟 Payment Status
+
+<img src="https://github.com/flexycode/CTFDMBSL_FINAL_PROJECT/blob/main/assets/pharmaxledger/pharmaxledger-11.png" />
+
+<img src="https://github.com/flexycode/CTFDMBSL_FINAL_PROJECT/blob/main/assets/pharmaxledger/pharmaxledger-12.png" />
+
 ### 🌟 Customer Support
 <img src="https://github.com/flexycode/CTFDMBSL_FINAL_PROJECT/blob/main/assets/pharmaxledger/pharmaxledger-9.png" />
 
 <!-- Database Schema Revision, Also image for Data Model and Entity Relationship Diagram ERD. Link should be point out through assets folder for editing README.md -->
 ## 🧊 Database Schema
 
-#### SQL
+### Supabase Schema ( Not Final!!!)
 
-```
-🚀 Coming Soon!!!
-```
+<img src="https://github.com/flexycode/CTFDMBSL_FINAL_PROJECT/blob/main/assets/normalization/supabase-schema.svg" />
 
 ## 🧊 Data Integration in Supabase
 
@@ -498,17 +504,20 @@ Description 🚀 Coming Soon!!!
 <!-- Normalization link down below -->
 ## 🧊 Normalization
 
-```
-🚀 Coming Soon!!!
-```
+<!-- Normalization Images -->
+<img src="https://github.com/flexycode/CTFDMBSL_FINAL_PROJECT/blob/main/assets/normalization/Database_tables.png" />
 
-<!-- Normalization Images 
-<img src="https://github.com/flexycode/CTINFMGL_FINAL_PROJECT/blob/main/documentation/images/Normalization%20SS-1.png" />
+<img src="https://github.com/flexycode/CTFDMBSL_FINAL_PROJECT/blob/main/assets/normalization/profiles.png" />
 
-<img src="https://github.com/flexycode/CTINFMGL_FINAL_PROJECT/blob/main/documentation/images/Normalization%20SS-2.png" />
+<img src="https://github.com/flexycode/CTFDMBSL_FINAL_PROJECT/blob/main/assets/normalization/notifications.png" />
 
-<img src="https://github.com/flexycode/CTINFMGL_FINAL_PROJECT/blob/main/documentation/images/Normalization%20SS-3.png" />
--->
+<img src="https://github.com/flexycode/CTFDMBSL_FINAL_PROJECT/blob/main/assets/normalization/payments.png" />
+
+<img src="https://github.com/flexycode/CTFDMBSL_FINAL_PROJECT/blob/main/assets/normalization/shipments.png" />
+
+<img src="https://github.com/flexycode/CTFDMBSL_FINAL_PROJECT/blob/main/assets/normalization/support_conversation.png" />
+
+<img src="https://github.com/flexycode/CTFDMBSL_FINAL_PROJECT/blob/main/assets/normalization/tracking_events.png" />
 
 ```
 Full Overview of Normalization is in the Folder of documentation
@@ -516,10 +525,10 @@ Full Overview of Normalization is in the Folder of documentation
 
 <!-- Entity Relationship Diagram Image link down below -->
 ## 🧊 Entity Relationship Diagram
-#### Proposal Version 
+#### Proposal Version ( v.1 )
 <img src="https://github.com/flexycode/CTFDMBSL_FINAL_PROJECT/blob/main/assets/Pharmaceutical%20Supply%20Chain.png" />
 
-#### Final Version 
+#### Final Version ( v.2 Not Final!!)
 <img src="https://github.com/flexycode/CTFDMBSL_FINAL_PROJECT/blob/main/assets/PSCM%20-%20ERD.png" />
 
 <!-- Sequence Diagram Image link down below -->
