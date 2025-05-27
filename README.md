@@ -67,8 +67,8 @@ To develop a centralized, real-time pharmaceutical supply chain management syste
 * **Programming Language:** [TypeScript](https://www.typescriptlang.org/) 
 * **Frontend:** [React.js](https://react.dev/), HTML5, CSS3 +
 * **Build tool and Development server:** [Vite](https://vite.dev/)
-* **Backend:** [[Supabase](https://supabase.com/)
-* **Database:** SQL / Posgresql integrated in Supabase
+* **Backend:** [Supabase](https://supabase.com/)
+* **Database:** Posgresql integrated in [Supabase](https://supabase.com/)
 
 ## 🚀 Future Features Use case
 * **AI Integration:** TensorFlow, Scikit-learn
