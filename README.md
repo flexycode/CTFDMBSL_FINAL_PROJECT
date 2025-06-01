@@ -679,7 +679,15 @@ Chronological list of updates, bug fixes, new features, and other modifications 
 
 ## [3.0.2] - 2025-05-27 
 - ✨ Third Phase of Revision using different tech stacks
-     
+
+## [4.0.1] - 2025-06-01 
+### Added Features
+- ✨ Inventory list of medicine
+- ✨ Rename the current inventory as shipments
+- ✨ inventory = list ng medicine stocks
+
+
+
 🧊 CTFDMBSL FINAL PROJECT
 
 <!-- Introduction Pannel button link, it will redirect to the top -->
