@@ -24,7 +24,7 @@
 
 ### PharmaXLedger
 
-PharmaXLedger is a comprehensive pharmaceutical supply chain management platform that leverages modern web technologies to provide secure, transparent tracking and management of pharmaceutical shipments.
+PharmaXLedger is a comprehensive pharmaceutical supply chain management platform that leverages modern web technologies to provide secure, transparent tracking and management of pharmaceutical shipments with advanced inventory management capabilities.
 
 <img src="https://github.com/flexycode/CTFDMBSL_FINAL_PROJECT/blob/main/assets/pharmaxledger/pharmaceutical.png" />
 
@@ -45,6 +45,7 @@ The Pharmaceutical Supply Chain Management application serves as a comprehensive
 - Inefficient manual tracking processes leading to errors and delays
 - Compliance risks due to inadequate documentation and tracking
 - Difficulty in quickly responding to supply chain disruptions
+- Poor inventory management leading to stockouts and expired medicines
 
 **Objectives:**
 
@@ -53,7 +54,7 @@ To develop a centralized, real-time pharmaceutical supply chain management syste
 
 **Specific Objectives:**
 - Implement end-to-end tracking of pharmaceutical products from manufacturer to end customer
-- Create a secure, role-based access control system for different stakeholders
+- Create a comprehensive medicine inventory management system with stock tracking
 - Enable real-time notifications and alerts for critical supply chain events
 - Generate comprehensive analytics and reports for inventory, shipment, and compliance tracking
 - Design a relational database that maintains relationships between entities while ensuring data integrity
@@ -64,11 +65,19 @@ To develop a centralized, real-time pharmaceutical supply chain management syste
 <!-- Techstacks down below (temporary need some proper decision for the group team in order to inlign for the project -->
 ## 💻 Techstacks # 1
 
+- **Frontend**:
 * **Programming Language:** [TypeScript](https://www.typescriptlang.org/) 
-* **Frontend:** [React.js](https://react.dev/), HTML5, CSS3 +
+* **Frontend:** [React.js 18](https://react.dev/), HTML5, CSS3 +
 * **Build tool and Development server:** [Vite](https://vite.dev/)
-* **Backend:** [Supabase](https://supabase.com/)
+* **Tailwind CSS for styling**
+* **Shadcn UI component library**
+* **React Router for navigation**
+* **Tanstack React Query for data fetching**
+
+- **Backend**:  
+* **Authentication:** [Supabase](https://supabase.com/)
 * **Database:** Posgresql integrated in [Supabase](https://supabase.com/)
+* **Supabase Edge Functions for serverless computing**
 
 ## 🚀 Future Features Use case
 * **AI Integration:** TensorFlow, Scikit-learn
@@ -155,41 +164,79 @@ The system employs a hybrid data management approach:
 
 ### 3.2 Design Diagrams
 
-**System Architecture Diagram:**
+## System Design
+
+### Enhanced System Architecture
+
+PharmaXLedger implements a modern client-server architecture with comprehensive inventory management:
 
 ```
-┌─────────────┐     ┌─────────────┐      ┌─────────────┐
-│             │     │             │      │             │
-│  React UI   │────▶│  Supabase   │◀────▶│ PostgreSQL  │
-│             │     │    API      │      │  Database   │
-└─────────────┘     └─────────────┘      └─────────────┘
-                           │
-                           ▼
-                    ┌─────────────┐
-                    │   Edge      │
-                    │  Functions  │
-                    └─────────────┘
+┌─────────────────┐     ┌─────────────────┐      ┌─────────────────┐
+│                 │     │                 │      │                 │
+│   React UI      │────▶│   Supabase API  │◀────▶│   PostgreSQL    │
+│                 │     │                 │      │   Database      │
+│ - Inventory Mgmt│     │ - Auth & RLS    │      │ - Inventory     │
+│ - Shipments     │     │ - Real-time     │      │ - Shipments     │
+│ - Dashboard     │     │ - Edge Functions│      │ - Stock Moves   │
+└─────────────────┘     └─────────────────┘      └─────────────────┘
+         │                        │                        │
+         │                        ▼                        │
+         │               ┌─────────────────┐               │
+         │               │  Edge Functions │               │
+         │               │ - Notifications │               │
+         └──────────────▶│ - Stock Alerts  │◀──────────────┘
+                         │ - Batch Jobs    │
+                         └─────────────────┘
 ```
 
-**Data Flow Diagram:**
+### Enhanced Entity Relationship Diagram (ERD)
 
 ```
-┌───────────┐      ┌───────────┐      ┌───────────┐      ┌───────────┐
-│           │      │           │      │           │      │           │
-│  Create   │─────▶│  Process  │─────▶│  Track    │─────▶│  Deliver  │
-│ Shipment  │      │   Order   │      │ Shipment  │      │ Products  │
-│           │      │           │      │           │      │           │
-└───────────┘      └───────────┘      └───────────┘      └───────────┘
-       │                                    │                   │
-       │                                    │                   │
-       ▼                                    ▼                   ▼
-┌───────────┐      ┌───────────┐      ┌───────────┐      ┌───────────┐
-│           │      │           │      │           │      │           │
-│ Inventory │      │ Payment   │      │ Tracking  │      │ Delivery  │
-│ Updates   │      │ Processing│      │ Events    │      │ Validation │
-│           │      │           │      │           │      │           │
-└───────────┘      └───────────┘      └───────────┘      └───────────┘
+┌─────────────┐       ┌─────────────┐       ┌─────────────┐
+│  profiles   │       │ medicine_   │       │ stock_      │
+│             │       │ inventory   │       │ movements   │
+│ id (PK)     │◀──┐   │             │──┐    │             │
+│ first_name  │   │   │ id (PK)     │  │    │ id (PK)     │
+│ last_name   │   └───│ user_id(FK) │  └───▶│ medicine_id │
+│ email       │       │ medicine_   │       │ movement_   │
+│ role        │       │ name        │       │ type        │
+│ company     │       │ stock_qty   │       │ quantity    │
+│ status      │       │ reorder_lvl │       │ prev_stock  │
+└─────────────┘       │ expiry_date │       │ new_stock   │
+      │               │ batch_no    │       │ created_at  │
+      │               │ category    │       └─────────────┘
+      ▼               └─────────────┘
+┌─────────────┐              │
+│ shipments   │              │
+│             │              │
+│ id (PK)     │              │
+│ user_id(FK) │              │
+│ medicine_   │◀─────────────┘
+│ name        │
+│ tracking_no │       ┌─────────────┐       ┌─────────────┐
+│ status      │       │ tracking_   │       │ support_    │
+│ origin      │──────▶│ events      │       │ conversations│
+│ destination │       │             │       │             │
+│ quantity    │       │ id (PK)     │       │ id (PK)     │
+│ batch_no    │       │ shipment_id │       │ user_id(FK) │
+│ expiry_date │       │ event_type  │       │ title       │
+└─────────────┘       │ location    │       │ status      │
+      │               │ description │       └─────────────┘
+      │               └─────────────┘              │
+      ▼                                           │
+┌─────────────┐       ┌─────────────┐              ▼
+│ payments    │       │ notifications│       ┌─────────────┐
+│             │       │             │       │ support_    │
+│ id (PK)     │       │ id (PK)     │       │ messages    │
+│ user_id(FK) │       │ user_id(FK) │       │             │
+│ amount      │       │ title       │       │ id (PK)     │
+│ status      │       │ content     │       │ convo_id(FK)│
+│ currency    │       │ read        │       │ sender_id   │
+└─────────────┘       └─────────────┘       │ content     │
+                                           │ is_admin    │
+                                           └─────────────┘
 ```
+
 
 ## Implementation
 
@@ -312,105 +359,96 @@ The evaluation employed a multi-tiered testing approach:
 - Role-based testing scenarios
 - Interface usability assessment
 
-# 💻 How to Run this Application
+## Implementation
 
+### Enhanced Technology Implementation
 
-### 1️⃣👷 First, let's check the package.json scripts we saw earlier and then set up the necessary environment variables.
+The implementation now includes comprehensive inventory management with the following key components:
 
-From the package.json, we know this is a Vite application with the following scripts:
+**Phase 1: Foundation (March 2025)**
+- Project initialization and repository setup
+- Database schema design with ERD modeling
+- Technology stack selection
+
+**Phase 2: Core Development (April 2025)**
+- Frontend development with React and TypeScript
+- Supabase integration for backend services
+- Authentication system implementation
+- Basic shipment tracking functionality
+
+**Phase 3: Advanced Features (May-June 2025)**
+- Medicine inventory management system
+- Stock movement tracking and alerts
+- Enhanced user interface with dashboard improvements
+- Real-time notifications and updates
+
+**Key Implementation Features:**
+
+1. **Inventory Management System**
+   - Comprehensive medicine catalog with detailed information
+   - Stock level monitoring with automatic reorder alerts
+   - Expiry date tracking and notifications
+   - Batch number management for traceability
+
+2. **Enhanced Shipment Tracking**
+   - Integration with inventory for automatic stock updates
+   - Real-time tracking with detailed event logs
+   - Medicine-specific shipping requirements
+
+3. **Real-time Updates**
+   - Live inventory updates across all connected clients
+   - Instant notifications for low stock and expiring medicines
+   - Real-time shipment status updates
+
+## Getting Started
+
+### Prerequisites
+- Node.js (v18+)
+- npm or yarn
+- Supabase account (for backend services)
+
+### Installation
+
+1. Clone the repository
+```bash
+git clone https://github.com/your-username/pharmaxledger.git
+cd pharmaxledger
 ```
-dev: For development
-build: For production build
-preview: For previewing the build
-```
-Before running the app, we need to ensure we have:
 
-1. Node modules installed
-2. Environment variables set up (particularly for Supabase)
-
-Let me help you set these up:
-
-### 2️⃣🚀 Second, let's install the dependencies:
-
-```
+2. Install dependencies
+```bash
 npm install
 ```
 
-### 3️⃣🚍 After installing dependencies, we need to set up the environment variables (.env) for Supabase
-
+3. Set up environment variables
+Create a `.env` file in the root directory:
 ```
-ls -la | grep .env
-```
-
-#### A. Create a `.env` file in the root directory:
-You'll need to replace these values with your actual Supabase credentials. To get these credentials:
-1. Go to [supabase](https://supabase.com)
-2. Sign up/Login to your account
-3. Create a new project or use an existing one
-4. Once in your project:
-   * The `VITE_SUPABASE_URL` can be found in Project Settings > API > Project URL
-   * The `VITE_SUPABASE_ANON_KEY` can be found in Project Settings > API > anon/public
-
-#### B. After setting up your Supabase project, you'll need to:
-1. Run the database migrations that are in the `/supabase/migrations` folder in your Supabase project
-
-2. Replace the placeholder values in the `.env` file with your actual Supabase credentials
-
-#### C. Here's what each environment variable is for:
-
-* **VITE_SUPABASE_URL:** Your Supabase project URL
-* **VITE_SUPABASE_ANON_KEY:** Your Supabase project's anonymous key (public key)
-* **VITE_TEMPO:** A flag for development tools (set to false by default)
-* **SUPABASE_PROJECT_ID:**
-
-#### .env
-```
-VITE_SUPABASE_URL=
-VITE_SUPABASE_ANON_KEY=
-VITE_TEMPO=false
-SUPABASE_PROJECT_ID=
+VITE_SUPABASE_URL=your_supabase_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
 ```
 
-
-### 4️⃣ Run the application
-
-Once you have:
-1. Installed the dependencies (`npm install`)
-2. Set up your Supabase project
-3. Added your Supabase credentials to the `.env` file
-
-You can then run the application in development mode with:
-```
+4. Start the development server
+```bash
 npm run dev
 ```
 
-<!-- Techstacks down below (temporary need some proper decision for the group team in order to inlign for the project
+## Application Flow
 
-## 1️⃣👷 Install Dependencies
-Run npm install to to install node modules 
-Also you direct already to frontend folder and run npm start
-```
-npm install
-```
+### Enhanced User Workflows
 
-## 2️⃣🚀 Run React-app
-Direct to frontend folder after you install the node modules
-```
-cd frontend
-npm start
-```
+#### Inventory Management Flow
+1. User adds medicines to inventory with detailed information
+2. System tracks stock levels and monitors expiry dates
+3. Automatic alerts for low stock and approaching expiry
+4. Stock movements are logged for audit trails
+5. Reports generated for inventory analysis
 
-## 3️⃣🚍 Run Node.js 
-Open another terminal in the current codebase to run nodejs for VS Code or other IDE base on what you are using such as Webstorm
-```
-cd backend 
-node index.js
-```
-
-## 4️⃣ Connect Database 
-```
-Connect MySQL dbs through Database repository folder
-```
+#### Shipment Creation Flow
+1. User creates shipment from available inventory
+2. System automatically updates stock levels
+3. Tracking number generated with real-time updates
+4. Medicine-specific shipping requirements applied
+5. Delivery confirmation updates inventory status
 
 -->
 
@@ -477,18 +515,257 @@ Connect MySQL dbs through Database repository folder
 
 <img src="https://github.com/flexycode/CTFDMBSL_FINAL_PROJECT/blob/main/assets/normalization/supabase-schema.svg" />
 
-## 🧊 Data Integration in Supabase
+## 🧊 Data Integration in Supabase / Database Schema
 
-#### PosgresSQL
-```
-Cumming Soon
+## Database Schema
+
+The PharmaXLedger database consists of the following main tables designed to handle pharmaceutical supply chain operations with comprehensive inventory management:
+
+### Core Tables
+
+#### 1. Profiles Table
+Stores user profile information and company details.
+
+```sql
+CREATE TABLE public.profiles (
+  id UUID PRIMARY KEY,
+  email TEXT NOT NULL,
+  first_name TEXT,
+  last_name TEXT,
+  role TEXT NOT NULL DEFAULT 'customer',
+  status TEXT NOT NULL DEFAULT 'Active',
+  phone TEXT,
+  company_name TEXT,
+  website TEXT,
+  address TEXT,
+  city TEXT,
+  state TEXT,
+  zip_code TEXT,
+  country TEXT
+);
 ```
 
-<!-- Data Model Image link down below -->
-# 🧊 Data Model
+#### 2. Medicine Inventory Table
+Central table for managing pharmaceutical inventory with comprehensive medicine details.
+
+```sql
+CREATE TABLE public.medicine_inventory (
+  id UUID NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
+  user_id UUID NOT NULL,
+  medicine_name TEXT NOT NULL,
+  generic_name TEXT,
+  brand_name TEXT,
+  category TEXT,
+  description TEXT,
+  dosage_form TEXT,
+  strength TEXT,
+  manufacturer TEXT,
+  batch_number TEXT,
+  stock_quantity INTEGER NOT NULL DEFAULT 0,
+  reorder_level INTEGER DEFAULT 10,
+  unit_price NUMERIC,
+  currency TEXT DEFAULT 'PHP',
+  expiry_date DATE,
+  storage_conditions TEXT,
+  created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),
+  updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now()
+);
 ```
-Description 🚀 Coming Soon!!!
+
+#### 3. Stock Movements Table
+Tracks all stock changes for audit and inventory management.
+
+```sql
+CREATE TABLE public.stock_movements (
+  id UUID NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
+  user_id UUID NOT NULL,
+  medicine_id UUID,
+  movement_type TEXT NOT NULL,
+  quantity_changed INTEGER NOT NULL,
+  previous_stock INTEGER NOT NULL,
+  new_stock INTEGER NOT NULL,
+  reference_id UUID,
+  notes TEXT,
+  created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now()
+);
 ```
+
+#### 4. Shipments Table
+Enhanced shipment management with detailed medicine information.
+
+```sql
+CREATE TABLE public.shipments (
+  id UUID NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
+  user_id UUID NOT NULL,
+  origin TEXT NOT NULL,
+  destination TEXT NOT NULL,
+  weight NUMERIC,
+  status TEXT NOT NULL DEFAULT 'pending',
+  tracking_number TEXT NOT NULL,
+  recipient_name TEXT,
+  recipient_email TEXT,
+  recipient_phone TEXT,
+  payment_status TEXT DEFAULT 'unpaid',
+  estimated_delivery TIMESTAMP WITH TIME ZONE,
+  shipping_cost NUMERIC,
+  currency TEXT DEFAULT 'PHP',
+  service_type TEXT DEFAULT 'Standard Delivery',
+  
+  -- Medicine-specific fields
+  medicine_name TEXT,
+  medicine_category TEXT,
+  dosage TEXT,
+  quantity INTEGER,
+  batch_number TEXT,
+  expiry_date DATE,
+  storage_requirements TEXT,
+  special_instructions TEXT,
+  
+  created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),
+  updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now()
+);
+```
+
+#### 5. Tracking Events Table
+Stores detailed tracking events for each shipment.
+
+```sql
+CREATE TABLE public.tracking_events (
+  id UUID NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
+  shipment_id UUID NOT NULL,
+  event_type TEXT NOT NULL,
+  location TEXT,
+  description TEXT,
+  created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now()
+);
+```
+
+#### 6. Support System Tables
+Enhanced support system for customer service.
+
+```sql
+-- Support Conversations
+CREATE TABLE public.support_conversations (
+  id UUID NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
+  user_id UUID NOT NULL,
+  title TEXT NOT NULL,
+  status TEXT NOT NULL DEFAULT 'open',
+  created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),
+  updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now()
+);
+
+-- Support Messages
+CREATE TABLE public.support_messages (
+  id UUID NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
+  conversation_id UUID NOT NULL,
+  sender_id UUID NOT NULL,
+  content TEXT NOT NULL,
+  is_admin BOOLEAN NOT NULL DEFAULT false,
+  read BOOLEAN NOT NULL DEFAULT false,
+  created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now()
+);
+```
+
+## SQL/PostgreSQL Implementation
+
+#### Enhanced Database Functions
+
+The system uses several PostgreSQL functions for automated user management and inventory tracking:
+
+```sql
+-- User Profile Creation Function
+CREATE OR REPLACE FUNCTION public.handle_new_user()
+RETURNS trigger
+LANGUAGE plpgsql
+SECURITY DEFINER
+AS $function$
+BEGIN
+  INSERT INTO public.profiles (id, email, first_name, last_name)
+  VALUES (
+    NEW.id,
+    NEW.email,
+    NEW.raw_user_meta_data->>'first_name',
+    NEW.raw_user_meta_data->>'last_name'
+  );
+  RETURN NEW;
+END;
+$function$
+
+-- Admin User Check Function
+CREATE OR REPLACE FUNCTION public.is_admin_user()
+RETURNS BOOLEAN AS $$
+BEGIN
+  RETURN EXISTS (
+    SELECT 1 FROM public.profiles 
+    WHERE id = auth.uid() AND role = 'admin'
+  );
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER STABLE;
+```
+
+### Row Level Security (RLS) Policies
+
+Comprehensive RLS policies ensure data privacy and access control:
+
+```sql
+-- Medicine Inventory RLS Policies
+CREATE POLICY "Users can view own inventory" ON public.medicine_inventory
+  FOR SELECT USING (auth.uid() = user_id);
+
+CREATE POLICY "Users can manage own inventory" ON public.medicine_inventory
+  FOR ALL USING (auth.uid() = user_id);
+
+-- Stock Movements RLS Policies  
+CREATE POLICY "Users can view own stock movements" ON public.stock_movements
+  FOR SELECT USING (auth.uid() = user_id);
+
+CREATE POLICY "Users can create stock movements" ON public.stock_movements
+  FOR INSERT WITH CHECK (auth.uid() = user_id);
+
+-- Admin policies for full access
+CREATE POLICY "Admins can view all inventory" ON public.medicine_inventory
+  FOR SELECT USING (public.is_admin_user());
+
+CREATE POLICY "Admins can view all stock movements" ON public.stock_movements
+  FOR SELECT USING (public.is_admin_user());
+```
+
+### Performance Indexes
+
+Strategic indexing for optimal performance:
+
+```sql
+-- Inventory management indexes
+CREATE INDEX idx_medicine_inventory_user_id ON public.medicine_inventory(user_id);
+CREATE INDEX idx_medicine_inventory_category ON public.medicine_inventory(category);
+CREATE INDEX idx_medicine_inventory_expiry ON public.medicine_inventory(expiry_date);
+CREATE INDEX idx_medicine_inventory_stock ON public.medicine_inventory(stock_quantity);
+
+-- Stock movement indexes
+CREATE INDEX idx_stock_movements_user_id ON public.stock_movements(user_id);
+CREATE INDEX idx_stock_movements_medicine_id ON public.stock_movements(medicine_id);
+CREATE INDEX idx_stock_movements_created_at ON public.stock_movements(created_at);
+
+-- Enhanced shipment indexes
+CREATE INDEX idx_shipments_medicine_name ON public.shipments(medicine_name);
+CREATE INDEX idx_shipments_expiry_date ON public.shipments(expiry_date);
+```
+
+### Real-time Subscriptions
+
+Enhanced real-time functionality for inventory and shipment updates:
+
+```sql
+-- Enable real-time for inventory tables
+ALTER TABLE public.medicine_inventory REPLICA IDENTITY FULL;
+ALTER TABLE public.stock_movements REPLICA IDENTITY FULL;
+
+-- Add tables to real-time publication
+ALTER PUBLICATION supabase_realtime ADD TABLE public.medicine_inventory;
+ALTER PUBLICATION supabase_realtime ADD TABLE public.stock_movements;
+```
+
+
 
 ## 🧊 Flow Chart
 
@@ -630,62 +907,118 @@ Professor Mrs. Jensen Santillan is a highly respected academic and industry prac
 
 <!-- Always document your changes, pull-request, bugfix, updates, patch notes for this final project. Always use this "🧊 Flight Booking" for commiting message for "pushing code" or "Pull-request"   -->
 # 📫 Changelogs 
-Chronological list of updates, bug fixes, new features, and other modifications for our Pharmaceutical Supply Chain Management.
+Chronological list of updates, bug fixes, new features, and other modifications for PharmaXLedger Pharmaceutical Supply Chain Management.
 
-## 💻 [1.0.0] - 2025-03-22      
-### Role & Project Management
+### 📦 Version 1.0.0 - March 22, 2025
+**Project Initialization**
+- ✨ Created initial repository structure
+- ✨ Set up project folder organization
+- ✨ Established development workflow
+- 🔧 Initial project configuration and setup
 
-### Added  
-- ✨ Create Repository
+### 📊 Version 1.0.1 - March 26, 2025
+**Design & Architecture**
+- ✨ Created comprehensive design concept for Pharmaceutical Supply Chain Management
+- 📋 Developed Entity Relationship Diagram (ERD)
+- 📁 Added ERD documentation files
+- 🗄️ Designed database schema for SQL implementation
+- 🍃 Created alternative MongoDB schema design
+- 📖 Enhanced project documentation
 
-### Changed
-- ✨ Folder set rename
+### 🎨 Version 1.1.0 - April 7, 2025
+**Frontend Development**
+- ✨ Initialized React frontend with TypeScript
+- 🎨 Set up Tailwind CSS for styling
+- 🧩 Integrated Shadcn UI component library
+- 📱 Created responsive design foundation
+- 🔧 Configured build tools and development environment
 
-### Fixed 
-- ✨ Fix changelogs
+### 🚀 Version 2.0.0 - April 17, 2025
+**Core Application Development**
+- ✨ Developed comprehensive homepage for PharmaXLedger
+- 📐 Created wireframes for MedicineCatalog and ShoppingCart
+- 👨‍💼 Built AdminDashboard and enhanced LandingPage
+- 🔐 Integrated Supabase for backend services
+- 📝 Implemented user registration (Sign Up) functionality
+- 💊 Added medicine management forms
+- 🛒 Fixed critical bugs in ShoppingCart component
+- 🔑 Resolved authentication issues in SignIn/SignOut flow
 
-## [1.0.1] - 2025-03-26   
-### Added  
-- ✨ Create an design concept for Pharmaceutical Supply Chain Management
-- ✨ Create Entity Relationship Diagram
-- ✨ Add Entity Relationship Diagram (ERD) files
-- ✨ Add Database Schema for SQL
-- ✨ Add Database Schema for MongoDB
+### 🔒 Version 2.0.1 - April 19, 2025
+**Security & Optimization**
+- 🏢 Created private repository for enhanced security
+- 📋 Added comprehensive application setup documentation
+- 🐛 Fixed remaining ShoppingCart.tsx issues
+- 🔄 Conducted full system revision and optimization
+- 📖 Updated deployment and running instructions
 
-## [1.0.1] - 2025-04-07   
-### Added  
-- ✨ Create Frontend
+### 🌟 Version 3.0.0 - May 27, 2025
+**Third Phase Revision**
+- 🔄 Major system overhaul with updated technology stack
+- ⚡ Performance improvements and optimization
+- 🛡️ Enhanced security measures
+- 🎨 UI/UX improvements and modernization
+- 📊 Improved data handling and state management
 
-## [2.0.1] - 2025-04-17   
-### Added  
-- ✨ Develop Homepage of PharmaXLedger
-- ✨ Design a Wireframe for MedicineCatalog and ShoppingCart
-- ✨ Develop AdminDashboard and LandingPage
-- ✨ Added a setup and integration for Supabase
-- ✨ Added Sign Up Form
-- ✨ Added a MedicineForm
-### Fixed 
-- ✨ Fixed bug on ShoppingCart
-- ✨ Fix bug regarding on SignIn and SignOut
+### 💊 Version 4.0.0 - June 1, 2025
+**Medicine Inventory Management System**
+- ✨ **NEW FEATURES**: Comprehensive medicine inventory management
+  - 📦 Medicine stock tracking with real-time updates
+  - 📊 Stock level monitoring and low stock alerts
+  - 📅 Expiry date tracking and notifications
+  - 🏷️ Batch number management for traceability
+  - 💰 Unit pricing and cost management
+  - 🏭 Manufacturer and supplier information
+  - 📋 Medicine categorization and search functionality
 
-## [2.0.1] - 2025-04-19   
-### Added  
-- ✨ Develop Private Repo for PharmaXLedger (will transfer here once finish)
-- ✨ Add procedure on how to run the application
-### Fixed 
-- ✨ Fix issues in ShoppingCart.tsx
-- ✨ Full revision
-- ✨
+- 🔄 **MAJOR CHANGES**: Renamed shipment management for clarity
+  - 📦 Previous "Inventory" renamed to "Shipments"
+  - 💊 New "Inventory" now refers to medicine stock management
+  - 🚚 Enhanced shipment tracking with inventory integration
 
-## [3.0.2] - 2025-05-27 
-- ✨ Third Phase of Revision using different tech stacks
+- 🗄️ **DATABASE ENHANCEMENTS**:
+  - 🆕 Added `medicine_inventory` table for stock management
+  - 📈 Added `stock_movements` table for audit trails
+  - 🔄 Enhanced shipments table with medicine details
+  - 🔐 Implemented Row Level Security (RLS) policies
+  - ⚡ Added performance indexes for optimized queries
 
-## [4.0.1] - 2025-06-01 
-### Added Features
-- ✨ Inventory list of medicine
-- ✨ Rename the current inventory as shipments
-- ✨ inventory = list ng medicine stocks
+- 🎨 **UI/UX IMPROVEMENTS**:
+  - 📊 New inventory dashboard with stock analytics
+  - ➕ Medicine addition modal with comprehensive forms
+  - 🔍 Advanced search and filtering capabilities
+  - 📱 Responsive design for mobile inventory management
+  - 🎨 Enhanced visual indicators for stock status
 
+- 🔧 **TECHNICAL IMPROVEMENTS**:
+  - ⚡ Real-time inventory updates across all clients
+  - 🔔 Automated notifications for inventory events
+  - 📊 Enhanced data validation and error handling
+  - 🏗️ Improved component architecture and reusability
+
+### 🔮 Future Roadmap
+- 📈 Advanced analytics and reporting dashboard
+- 🤖 AI-powered demand forecasting
+- 📱 Mobile application development
+- 🌐 API integrations with external suppliers
+- 🔄 Automated reordering system
+- 📋 Regulatory compliance tracking
+- 🏥 Multi-location inventory management
+
+---
+
+**Legend:**
+- ✨ New Feature
+- 🔄 Changed/Updated
+- 🐛 Bug Fix
+- 🔧 Technical Improvement
+- 📖 Documentation
+- 🎨 UI/UX Enhancement
+- 🔐 Security
+- 📊 Data/Analytics
+- 🚀 Performance
+
+---
 
 
 🧊 CTFDMBSL FINAL PROJECT
