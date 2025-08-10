@@ -11,6 +11,7 @@
 ### No. of Units: [3 Units](https://www.youtube.com/watch?v=HNefNLOHVYk)
 ### Prerequisite: [CTINFMGL - INFORMATION MANAGEMENT](https://github.com/flexycode/CTINFMGL)
 ### Project Link: [PharmaXLedger Project Link](https://github.com/flexycode/PharmaXLedger)
+### Note: [Naka Private yung Repo hindi pwede ishare 😂 Ask nyo na lang si Brian](https://www.youtube.com/watch?v=UCCyoocDxBA&list=RDUCCyoocDxBA&start_radio=1)
 
 <!-- Genshin Impact -->
 <div align="center">
@@ -1041,7 +1042,7 @@ Chronological list of updates, bug fixes, new features, and other modifications 
 
 <!-- End point line insert Comeback again next time, feel free to modify this  -->
 <p align="center">
-<img src="https://readme-typing-svg.demolab.com/?lines=💎💎Come+Back+Again+next+time💎💎" alt="mystreak"/>
+<img src="https://readme-typing-svg.demolab.com/?lines=Come+Back+Again+next+time" alt="mystreak"/>
 </p>
 
 </p>
