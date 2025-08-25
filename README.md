@@ -66,7 +66,7 @@ To develop a centralized, real-time pharmaceutical supply chain management syste
 <!-- Techstacks down below (temporary need some proper decision for the group team in order to inlign for the project -->
 ## 💻 Techstacks # 1
 
-- **Frontend**:
+**Frontend**:
 * **Programming Language:** [TypeScript](https://www.typescriptlang.org/) 
 * **Frontend:** [React.js 18](https://react.dev/), HTML5, CSS3 +
 * **Build tool and Development server:** [Vite](https://vite.dev/)
@@ -75,7 +75,7 @@ To develop a centralized, real-time pharmaceutical supply chain management syste
 * **React Router for navigation**
 * **Tanstack React Query for data fetching**
 
-- **Backend**:  
+**Backend**:  
 * **Authentication:** [Supabase](https://supabase.com/)
 * **Database:** Posgresql integrated in [Supabase](https://supabase.com/)
 * **Supabase Edge Functions for serverless computing**
